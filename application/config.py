@@ -3,11 +3,10 @@ from typing import Optional
 
 
 class Config:
-    def __init__(self) -> None:
+    def load_config(self) -> None:
         self.flask(**ENVMod.load_args(Config.flask))
         self.general(**ENVMod.load_args(Config.general))
         self.database(**ENVMod.load_args(Config.database))
-
 
     @ENVMod.register(section_name='FLASK')
     def flask(

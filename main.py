@@ -2,8 +2,8 @@ import sys
 from classmods import ENVMod
 from application import (
     cnf,
-    blueprints,
     db,
+    blueprints,
     create_app,
     add_error_handler,
     register_bluprints,
@@ -11,7 +11,8 @@ from application import (
 )
 
 def main() -> int:
-    ENVMod.load_dotenv()
+    ENVMod.load_dotenv(verbose=True)
+    cnf.load_config()
     app = create_app(__name__)
     init_database(app, db)
     add_error_handler(app)
