@@ -4,5 +4,7 @@
 /.git
 /.temp
 
+.env
+
 __cache__
 dev_*.*
