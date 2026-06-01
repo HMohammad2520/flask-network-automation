@@ -45,7 +45,8 @@
     }
 
     .featured-image img {
-      max-width: 100%;
+      width: 65%;
+      height: auto;
       border-radius: var(--radius-md);
       box-shadow: var(--shadow-md);
       transition: var(--transition);
@@ -301,11 +302,7 @@
 
   <!-- Featured Image -->
   <div class="featured-image">
-    <img 
-        src="{{url_for('static', filename='image/automation.png')}}" 
-        alt="Devixa Automation Platform"
-        style="min-height: 300px; "
-      >
+    <img  src="{{url_for('static', filename='image/automation.png')}}" alt="Devixa Automation Platform">
     <p>
       Streamline your development workflow
     </p>
