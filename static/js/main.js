@@ -46,11 +46,11 @@
         subscribeDrawerBtn.addEventListener('click', function () {
             const emailInput = document.getElementById('newsEmailDrawer');
             if (emailInput && emailInput.value.trim() !== '' && emailInput.value.includes('@')) {
-                alert(`✨ Thanks for subscribing! (demo) We'll send updates to ${emailInput.value} – modern teal vibes only.`);
+                alert(`✨ Thanks for subscribing! We'll send updates to ${emailInput.value} – modern teal vibes only.`);
                 emailInput.value = '';
-                closeSidebar(); // Optional: close sidebar after subscription
+                closeSidebar();
             } else {
-                alert('🌊 Please enter a valid email address to continue (demo interaction).');
+                alert('🌊 Please enter a valid email address to continue.');
             }
         });
     }
