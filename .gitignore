@@ -1,0 +1,8 @@
+/.db
+/.log
+/.venv
+/.git
+/.temp
+
+__cache__
+dev_*.*
