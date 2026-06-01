@@ -19,7 +19,7 @@ def main() -> int:
     register_bluprints(app, blueprints)
 
     app.run(
-        host=cnf.flask_bind,
+        host=cnf.flask_host,
         port=cnf.flask_port,
         debug=cnf.flask_debug,
     )

@@ -16,7 +16,7 @@ class Config:
         debug: bool = True,
         secret: Optional[str] = None,
     ) -> None:
-        self.flask_bind = host
+        self.flask_host = host
         self.flask_port = port
         self.flask_debug = debug
         self.flask_secret = secret
