@@ -325,7 +325,7 @@
           <li><a href="{{ url_for('website.faq') }}#contributing">How can I contribute?</a></li>
           <li><a href="{{ url_for('website.faq') }}#pricing">What's your pricing model?</a></li>
         </ul>
-        <a href="#" class="faq-link">View all FAQs →</a>
+        <a href="{{ url_for('website.faq') }}" class="faq-link">View all FAQs →</a>
       </div>
     </div>
   </div>
@@ -346,30 +346,23 @@
         const email = document.getElementById('email').value;
         const subject = document.getElementById('subject').value;
         const message = document.getElementById('message').value;
-        
+
         // Simple validation
         if (!name || !email || !message) {
           alert('Please fill in all required fields (Name, Email, and Message).');
           return;
         }
-        
+
         if (!email.includes('@') || !email.includes('.')) {
           alert('Please enter a valid email address.');
           return;
         }
-        
-        // Show success message (demo - replace with actual form submission)
+
+        // Show success message
         alert(`✨ Thanks ${name}! Your message has been sent.\n\nWe'll respond to ${email} within 24-48 hours.`);
-        
+
         // Clear form (optional)
         contactForm.reset();
-        
-        // Here you would typically send data to your backend:
-        // fetch('/api/contact', {
-        //   method: 'POST',
-        //   headers: { 'Content-Type': 'application/json' },
-        //   body: JSON.stringify({ name, email, subject, message })
-        // });
       });
     }
   })();
