@@ -5,7 +5,7 @@ import importlib.util
 from pathlib import Path
 from flask import Flask, Blueprint, json
 from flask_sqlalchemy import SQLAlchemy
-from typing import Optional
+from typing import List
 from .__version__ import get_version
 from .config import cnf
 from .views import blueprints, apps_bp
@@ -46,25 +46,13 @@ def add_error_handler(app: Flask) -> Flask:
         raise exp
     return app
 
-
-def register_bluprints(app: Flask, bluprints: list[Blueprint]) -> Flask:
-    for blueprint in bluprints:
-        app.register_blueprint(blueprint)
-
-    return app
-
-
-def discover_and_register_apps(apps_bp: Blueprint, apps_dir: Optional[str]=None):
-    if apps_dir is None:
-        apps_path = Path(__file__).parent.parent.parent / 'apps'
-
-    else:
-        apps_path = Path(apps_dir)
+def register_extentions(apps_bp: Blueprint, apps_dir: Path | str='extentions') -> List[Blueprint]:
+    apps_path = Path(apps_dir)
 
     if not apps_path.exists():
-        print(f"Apps folder not found at: {apps_path}")
-        return
-    
+        raise RuntimeError('Extentions Folder Should exist.')
+
+    blueprints = []
     # Iterate through each subfolder in apps directory
     for app_folder in apps_path.iterdir():
         if not app_folder.is_dir():
@@ -74,7 +62,6 @@ def discover_and_register_apps(apps_bp: Blueprint, apps_dir: Optional[str]=None)
         init_file = app_folder / '__init__.py'
         if not init_file.exists():
             continue
-        
 
         # Dynamic import of the app module
         module_name = f"external_apps_{app_folder.name}"
@@ -98,11 +85,20 @@ def discover_and_register_apps(apps_bp: Blueprint, apps_dir: Optional[str]=None)
             extention_bp.url_prefix = str('/' + extention_bp.name)
 
             apps_bp.register_blueprint(extention_bp)
-
+            blueprints.append(extention_bp)
             print(f"Registered blueprint: {extention_bp.name} --> apps{extention_bp.url_prefix}")
 
         else:
             print(f"No 'bp' or 'blueprint' attribute found in {app_folder.name}")
+
+    return blueprints
+
+
+def register_bluprints(app: Flask, bluprints: list[Blueprint]) -> Flask:
+    for blueprint in bluprints:
+        app.register_blueprint(blueprint)
+
+    return app
 
 
 def init_database(app: Flask, db: SQLAlchemy) -> Flask:
@@ -116,10 +112,10 @@ def init_database(app: Flask, db: SQLAlchemy) -> Flask:
 __all__ = [
     'get_version',
     'create_app',
+    'register_extentions',
     'register_bluprints',
     'blueprints',
     'apps_bp',
-    'discover_and_register_apps',
     'cnf',
     'db',
 ]
