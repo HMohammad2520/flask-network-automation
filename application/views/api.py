@@ -3,7 +3,7 @@ from typing import Dict, Optional
 from ..models import APIMethod, model_map, db
 from .. import cnf
 
-api = Blueprint('api', 'api', url_prefix='/api')
+api_bp = Blueprint('api', 'api', url_prefix='/api')
 
 """
 @api.errorhandler(Exception)
@@ -21,7 +21,7 @@ def api_error_handler(exp: Exception):
 
 """
 
-@api.before_request
+@api_bp.before_request
 def before_request():
     authorization = request.headers.get('Authorization')
     if not authorization:
@@ -37,7 +37,7 @@ def before_request():
     token = token[1]
     ## TODO: Check Token Here
 
-@api.route('/')
+@api_bp.route('/')
 def index():
     return jsonify('Welcome to API')
 
@@ -87,7 +87,7 @@ def method_execution(
 
 
 
-@api.route('/<model_name>/<pk_number>/<method_name>')
+@api_bp.route('/<model_name>/<pk_number>/<method_name>')
 def instance_level_method(model_name: str, pk_number: str, method_name: str):
     try:
         pk = int(pk_number) 
@@ -98,6 +98,6 @@ def instance_level_method(model_name: str, pk_number: str, method_name: str):
     return method_execution(model_name, method_name, pk)
 
 
-@api.route('/<model_name>/<method_name>')
+@api_bp.route('/<model_name>/<method_name>')
 def class_level_method(model_name, method_name):
     return method_execution(model_name, method_name)
