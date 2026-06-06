@@ -4,9 +4,11 @@ from application import (
     cnf,
     db,
     blueprints,
+    apps_bp,
     create_app,
     add_error_handler,
     register_bluprints,
+    discover_and_register_apps,
     init_database,
 )
 
@@ -16,6 +18,7 @@ def main() -> int:
     app = create_app(__name__)
     init_database(app, db)
     add_error_handler(app)
+    discover_and_register_apps(apps_bp=apps_bp, apps_dir='extensions')
     register_bluprints(app, blueprints)
 
     app.run(

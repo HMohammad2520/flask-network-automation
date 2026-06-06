@@ -9,16 +9,15 @@ ATTRIBS: Dict[str, Any] = {
     'version': get_version(),
 }
 
-
 @root_bp.route('/')
-def index():
-    return redirect(url_for('apps.website.index'))
-
+@root_bp.route('/website')
+@root_bp.route('/website/<all>')
+def index(all=None):
+    return redirect(url_for(f'apps.website.{all or 'index'}'))
 
 @root_bp.route('/favicon.ico')
 def favicon():
-    return redirect(url_for('static', filename='favicon/favicon.ico'))
-
+    return redirect(url_for('apps.website.static', filename='favicon/favicon.ico'))
 
 @root_bp.route('/.well-known/appspecific/com.chrome.devtools.json')
 def chrome_dev_tools():

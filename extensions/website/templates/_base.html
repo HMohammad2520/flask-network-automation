@@ -7,7 +7,7 @@
     </title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('apps.website.static', filename='css/main.css') }}" />
   </head>
 
   <body>
@@ -19,10 +19,10 @@
             <p>Build small • Build useful • Build clean</p>
           </div>
           <div class="nav-highlight">
-            <a href="{{ url_for('website.index') }}">Home</a>
-            <a href="{{ url_for('website.contact') }}">Contact</a>
-            <a href="{{ url_for('website.about') }}">About</a>
-            <a href="{{ url_for('website.faq') }}">FAQ</a>
+            <a href="{{ url_for('apps.website.index') }}">Home</a>
+            <a href="{{ url_for('apps.website.contact') }}">Contact</a>
+            <a href="{{ url_for('apps.website.about') }}">About</a>
+            <a href="{{ url_for('apps.website.faq') }}">FAQ</a>
           </div>
         </div>
         {% block style %}
@@ -36,7 +36,7 @@
       <div class="breadcrumb-section">
         <div class="container">
           <ul class="breadcrumb">
-          <li><a href="{{url_for('website.index')}}">Website</a></li>
+          <li><a href="{{url_for('apps.website.index')}}">Website</a></li>
           {% for bread in breadcrumbs %}
             <li class="{% if bread['url'] == None %}current{% endif %}">
               {% if bread['url'] != None %}<a href="{{bread['url']}}">{% endif %}
@@ -93,10 +93,10 @@
             </div>
             <div class="footer-col">
               <h4>Explore</h4>
-              <a href="{{ url_for('website.index') }}">Home</a>
-              <a href="{{ url_for('website.contact') }}">Contact</a>
-              <a href="{{ url_for('website.about') }}">About</a>
-              <a href="{{ url_for('website.faq') }}">FAQ</a>
+              <a href="{{ url_for('apps.website.index') }}">Home</a>
+              <a href="{{ url_for('apps.website.contact') }}">Contact</a>
+              <a href="{{ url_for('apps.website.about') }}">About</a>
+              <a href="{{ url_for('apps.website.faq') }}">FAQ</a>
             </div>
             <div class="footer-col">
               <h4>Resources</h4>
@@ -108,7 +108,7 @@
             </div>
             <div class="footer-col">
               <h4>Connect</h4>
-              <a href="{{ url_for('website.contact') }}">Contact</a>
+              <a href="{{ url_for('apps.website.contact') }}">Contact</a>
               <a href="https://github.com/devixa-tech">GitHub</a>
             </div>
           </div>
@@ -124,7 +124,7 @@
       </div>
     {% endblock %}
 
-    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script src="{{ url_for('apps.website.static', filename='js/main.js') }}"></script>
     {% block script %}
       <script></script>
     {% endblock %}
