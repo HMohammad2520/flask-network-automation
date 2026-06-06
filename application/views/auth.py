@@ -1,8 +1,8 @@
 from flask import Blueprint, request, abort
 
-auth = Blueprint('auth', 'auth', url_prefix='/auth')
+auth_bp = Blueprint('auth', 'auth', url_prefix='/auth')
 
-@auth.route('/login', methods=['POST'])
+@auth_bp.route('/login', methods=['POST'])
 def login():
     username = request.form.get('username')
     password = request.form.get('password')
@@ -11,7 +11,7 @@ def login():
 
     return 'TEST_TOKEN'
 
-@auth.route('/logout', methods=['POST'])
+@auth_bp.route('/logout', methods=['POST'])
 def logout():
     token = request.form.get('token', '')
     if not token:

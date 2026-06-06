@@ -4,6 +4,8 @@
 /.git
 /.temp
 
+instance
+
 .env
 
 __cache__
