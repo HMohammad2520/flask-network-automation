@@ -2,9 +2,11 @@ from flask import Blueprint, redirect, render_template, url_for
 
 bp = Blueprint(name='website', import_name=__name__)
 
+
 @bp.route('/')
 def index():
     return redirect(url_for('apps.website.home'))
+
 
 @bp.route('/home')
 def home():
@@ -12,6 +14,7 @@ def home():
         {'name': 'Home', 'url': None},
     ]
     return render_template('home.html', breadcrumbs=breadcrumbs)
+
 
 @bp.route('/contact')
 def contact():
@@ -21,6 +24,7 @@ def contact():
     ]
     return render_template('contact.html', breadcrumbs=breadcrumbs)
 
+
 @bp.route('/about')
 def about():
     breadcrumbs = [
@@ -29,6 +33,7 @@ def about():
     ]
     return render_template('about.html', breadcrumbs=breadcrumbs)
 
+
 @bp.route('/faq')
 def faq():
     breadcrumbs = [
@@ -36,5 +41,6 @@ def faq():
         {'name': 'FAQ', 'url': None},
     ]
     return render_template('faq.html', breadcrumbs=breadcrumbs)
+
 
 __all__ = ['bp']

@@ -1,7 +1,5 @@
 {% extends '_base.html' %}
-
-{% block title %}FAQ{% endblock %}
-
+{% block title %}FAQ{% endblock %} 
 {% block style %}
 <style>
   .faq-wrapper {
@@ -259,19 +257,20 @@
   }
 </style>
 {% endblock %}
-
 {% block content %}
 <div class="faq-wrapper">
   <!-- FAQ Header -->
   <div class="faq-header">
     <h1>Frequently Asked Questions</h1>
-    <p>Everything you need to know about Devixa tools and automation platform</p>
+    <p>
+      Everything you need to know about Devixa tools and automation platform
+    </p>
   </div>
 
   <!-- Table of Contents (Anchor Links for Accessibility) -->
   <div class="toc-section" aria-label="Table of Contents">
     <h2>
-      <span>📑</span> 
+      <span>📑</span>
       Jump to Section
     </h2>
     <div class="toc-grid">
@@ -295,19 +294,31 @@
       </button>
       <div class="faq-answer">
         <div class="faq-answer-content">
-          <p>Getting started with Devixa tools is simple! Here's a quick guide:</p>
+          <p>
+            Getting started with Devixa tools is simple! Here's a quick guide:
+          </p>
           <ol>
-            <li><strong>Browse our repositories</strong> on <a href="https://github.com/devixa-tech">GitHub</a> to find the tool you need</li>
+            <li>
+              <strong>Browse our repositories</strong> on
+              <a href="https://github.com/devixa-tech">GitHub</a> to find the
+              tool you need
+            </li>
             <li><strong>Install via pip</strong> (for Python packages):</li>
           </ol>
           <div class="code-block">pip install classmods</div>
           <p>Or for py-zammad-cti:</p>
           <div class="code-block">pip install py-zammad-cti</div>
           <ol start="3">
-            <li><strong>Check the documentation</strong> in each repository's README</li>
+            <li>
+              <strong>Check the documentation</strong> in each repository's
+              README
+            </li>
             <li><strong>Explore examples</strong> to see the tool in action</li>
           </ol>
-          <p>All our tools are designed to be lightweight and easy to integrate into existing projects.</p>
+          <p>
+            All our tools are designed to be lightweight and easy to integrate
+            into existing projects.
+          </p>
         </div>
       </div>
     </div>
@@ -319,11 +330,20 @@
       </button>
       <div class="faq-answer">
         <div class="faq-answer-content">
-          <p>We keep dependencies minimal by design. Most Devixa tools have <strong>zero or very few external dependencies</strong>. Requirements are always listed in the <code>requirements.txt</code> or <code>pyproject.toml</code> file of each repository.</p>
+          <p>
+            We keep dependencies minimal by design. Most Devixa tools have
+            <strong>zero or very few external dependencies</strong>.
+            Requirements are always listed in the
+            <code>requirements.txt</code> or <code>pyproject.toml</code> file of
+            each repository.
+          </p>
           <p>For example:</p>
           <ul>
             <li><strong>classmods</strong> - No external dependencies</li>
-            <li><strong>py-zammad-cti</strong> - Only requires <code>requests</code> library</li>
+            <li>
+              <strong>py-zammad-cti</strong> - Only requires
+              <code>requests</code> library
+            </li>
           </ul>
         </div>
       </div>
@@ -341,15 +361,24 @@
       </button>
       <div class="faq-answer">
         <div class="faq-answer-content">
-          <p><strong>Yes, absolutely!</strong> All Devixa Tech projects are 100% open source.</p>
-          <p>Our repositories are publicly available on <a href="https://github.com/devixa-tech">GitHub</a>, and you can:</p>
+          <p>
+            <strong>Yes, absolutely!</strong> All Devixa Tech projects are 100%
+            open source.
+          </p>
+          <p>
+            Our repositories are publicly available on
+            <a href="https://github.com/devixa-tech">GitHub</a>, and you can:
+          </p>
           <ul>
             <li>View all source code</li>
             <li>Fork and modify for your needs</li>
             <li>Use in commercial projects (MIT License)</li>
             <li>Learn from our implementation patterns</li>
           </ul>
-          <p>We believe transparency and community collaboration make better software.</p>
+          <p>
+            We believe transparency and community collaboration make better
+            software.
+          </p>
         </div>
       </div>
     </div>
@@ -361,7 +390,10 @@
       </button>
       <div class="faq-answer">
         <div class="faq-answer-content">
-          <p>Most Devixa projects use the <strong>MIT License</strong>, which is one of the most permissive open source licenses.</p>
+          <p>
+            Most Devixa projects use the <strong>MIT License</strong>, which is
+            one of the most permissive open source licenses.
+          </p>
           <p>This means you can:</p>
           <ul>
             <li>✅ Use the software commercially</li>
@@ -369,7 +401,10 @@
             <li>✅ Distribute your modifications</li>
             <li>✅ Use in proprietary projects</li>
           </ul>
-          <p>The only requirement is to include the original copyright notice. Check each repository for its specific license terms.</p>
+          <p>
+            The only requirement is to include the original copyright notice.
+            Check each repository for its specific license terms.
+          </p>
         </div>
       </div>
     </div>
@@ -389,12 +424,27 @@
           <p>We welcome contributions of all kinds! Here's how you can help:</p>
           <ul>
             <li><strong>🐛 Report bugs</strong> - Open an issue on GitHub</li>
-            <li><strong>💡 Suggest features</strong> - Start a discussion or open a feature request</li>
-            <li><strong>📝 Improve documentation</strong> - Fix typos, add examples, clarify explanations</li>
-            <li><strong>💻 Submit code</strong> - Fork a repository, make changes, and submit a Pull Request</li>
-            <li><strong>🌍 Spread the word</strong> - Star our repos, share with colleagues, write about us</li>
+            <li>
+              <strong>💡 Suggest features</strong> - Start a discussion or open
+              a feature request
+            </li>
+            <li>
+              <strong>📝 Improve documentation</strong> - Fix typos, add
+              examples, clarify explanations
+            </li>
+            <li>
+              <strong>💻 Submit code</strong> - Fork a repository, make changes,
+              and submit a Pull Request
+            </li>
+            <li>
+              <strong>🌍 Spread the word</strong> - Star our repos, share with
+              colleagues, write about us
+            </li>
           </ul>
-          <p>Check our <a href="#">Contributing Guide</a> for detailed instructions and coding standards.</p>
+          <p>
+            Check our <a href="#">Contributing Guide</a> for detailed
+            instructions and coding standards.
+          </p>
         </div>
       </div>
     </div>
@@ -406,15 +456,34 @@
       </button>
       <div class="faq-answer">
         <div class="faq-answer-content">
-          <p>To ensure quality and consistency, please follow these guidelines:</p>
+          <p>
+            To ensure quality and consistency, please follow these guidelines:
+          </p>
           <ol>
-            <li><strong>Keep it focused</strong> - One feature or fix per PR</li>
-            <li><strong>Write tests</strong> - If applicable, include tests for your changes</li>
-            <li><strong>Update documentation</strong> - Keep README and docstrings current</li>
-            <li><strong>Follow style</strong> - Match existing code style (PEP 8 for Python)</li>
-            <li><strong>Describe your changes</strong> - Explain what and why in the PR description</li>
+            <li>
+              <strong>Keep it focused</strong> - One feature or fix per PR
+            </li>
+            <li>
+              <strong>Write tests</strong> - If applicable, include tests for
+              your changes
+            </li>
+            <li>
+              <strong>Update documentation</strong> - Keep README and docstrings
+              current
+            </li>
+            <li>
+              <strong>Follow style</strong> - Match existing code style (PEP 8
+              for Python)
+            </li>
+            <li>
+              <strong>Describe your changes</strong> - Explain what and why in
+              the PR description
+            </li>
           </ol>
-          <p>All contributions will be reviewed by maintainers. Don't hesitate to ask questions!</p>
+          <p>
+            All contributions will be reviewed by maintainers. Don't hesitate to
+            ask questions!
+          </p>
         </div>
       </div>
     </div>
@@ -432,14 +501,21 @@
       <div class="faq-answer">
         <div class="faq-answer-content">
           <p><strong>All Devixa tools are completely free!</strong> 🎉</p>
-          <p>We believe great developer tools should be accessible to everyone. There's no pricing model because:</p>
+          <p>
+            We believe great developer tools should be accessible to everyone.
+            There's no pricing model because:
+          </p>
           <ul>
             <li>All projects are open source (MIT License)</li>
             <li>No hidden fees or premium tiers</li>
             <li>No paywalls for features</li>
             <li>No usage limits or restrictions</li>
           </ul>
-          <p>If you find our tools valuable, consider <a href="#contributing">contributing</a> or starring our repositories. That's the best support!</p>
+          <p>
+            If you find our tools valuable, consider
+            <a href="#contributing">contributing</a> or starring our
+            repositories. That's the best support!
+          </p>
         </div>
       </div>
     </div>
@@ -451,7 +527,10 @@
       </button>
       <div class="faq-answer">
         <div class="faq-answer-content">
-          <p><strong>Yes, absolutely!</strong> The MIT license allows commercial use without restrictions.</p>
+          <p>
+            <strong>Yes, absolutely!</strong> The MIT license allows commercial
+            use without restrictions.
+          </p>
           <p>You can integrate Devixa tools into:</p>
           <ul>
             <li>Proprietary software</li>
@@ -459,7 +538,10 @@
             <li>Enterprise applications</li>
             <li>Any commercial project</li>
           </ul>
-          <p>The only requirement is to include the original copyright notice. No need to share your source code or pay any fees.</p>
+          <p>
+            The only requirement is to include the original copyright notice. No
+            need to share your source code or pay any fees.
+          </p>
         </div>
       </div>
     </div>
@@ -476,7 +558,10 @@
       </button>
       <div class="faq-answer">
         <div class="faq-answer-content">
-          <p>We support <strong>Python 3.8 and above</strong> for all our Python packages.</p>
+          <p>
+            We support <strong>Python 3.8 and above</strong> for all our Python
+            packages.
+          </p>
           <p>Testing is performed regularly on:</p>
           <ul>
             <li>Python 3.8</li>
@@ -485,7 +570,10 @@
             <li>Python 3.11</li>
             <li>Python 3.12</li>
           </ul>
-          <p>We recommend using the latest stable Python version for best performance and security.</p>
+          <p>
+            We recommend using the latest stable Python version for best
+            performance and security.
+          </p>
         </div>
       </div>
     </div>
@@ -500,11 +588,17 @@
           <p>For security concerns, please follow responsible disclosure:</p>
           <ol>
             <li><strong>DO NOT</strong> open a public GitHub issue</li>
-            <li><strong>Email us directly</strong> at <a href="mailto:security@devixa.tech">security@devixa.tech</a></li>
+            <li>
+              <strong>Email us directly</strong> at
+              <a href="mailto:security@devixa.tech">security@devixa.tech</a>
+            </li>
             <li>Provide detailed information about the vulnerability</li>
             <li>Allow us time to investigate and patch (usually 7-14 days)</li>
           </ol>
-          <p>We take security seriously and will acknowledge your report within 48 hours.</p>
+          <p>
+            We take security seriously and will acknowledge your report within
+            48 hours.
+          </p>
         </div>
       </div>
     </div>
@@ -523,12 +617,28 @@
         <div class="faq-answer-content">
           <p>We offer several support channels:</p>
           <ul>
-            <li><strong>GitHub Issues</strong> - For bug reports and feature requests</li>
-            <li><strong>GitHub Discussions</strong> - For questions and community help</li>
-            <li><strong>Documentation</strong> - Check README files in each repository</li>
-            <li><strong>Email</strong> - <a href="mailto:support@devixa.tech">support@devixa.tech</a> for direct inquiries</li>
+            <li>
+              <strong>GitHub Issues</strong> - For bug reports and feature
+              requests
+            </li>
+            <li>
+              <strong>GitHub Discussions</strong> - For questions and community
+              help
+            </li>
+            <li>
+              <strong>Documentation</strong> - Check README files in each
+              repository
+            </li>
+            <li>
+              <strong>Email</strong> -
+              <a href="mailto:support@devixa.tech">support@devixa.tech</a> for
+              direct inquiries
+            </li>
           </ul>
-          <p>We aim to respond to all inquiries within 24-48 hours (Monday-Friday).</p>
+          <p>
+            We aim to respond to all inquiries within 24-48 hours
+            (Monday-Friday).
+          </p>
         </div>
       </div>
     </div>
@@ -538,63 +648,66 @@
   <div class="contact-cta">
     <h3>❓ Still have questions?</h3>
     <p>Can't find what you're looking for? We're here to help!</p>
-    <a href="{{ url_for('apps.website.contact') }}" class="btn-outline">Contact Us →</a>
+    <a href="{{ url_for('apps.website.contact') }}" class="btn-outline"
+      >Contact Us →</a
+    >
   </div>
 </div>
 
 <!-- Back to Top Button -->
 <a href="#" id="backToTop" class="back-to-top" aria-label="Back to top">↑</a>
 {% endblock %}
-
 {% block script %}
 <script>
   // FAQ Accordion Functionality
-  document.querySelectorAll('.faq-question').forEach(button => {
-    button.addEventListener('click', () => {
-      const faqItem = button.closest('.faq-item');
-      const isActive = faqItem.classList.contains('active');
-      
+  document.querySelectorAll(".faq-question").forEach((button) => {
+    button.addEventListener("click", () => {
+      const faqItem = button.closest(".faq-item");
+      const isActive = faqItem.classList.contains("active");
+
       // Optional: Close other items (uncomment for single-open behavior)
       // document.querySelectorAll('.faq-item').forEach(item => {
       //   if (item !== faqItem) item.classList.remove('active');
       // });
-      
-      faqItem.classList.toggle('active');
-      
+
+      faqItem.classList.toggle("active");
+
       // Update aria-expanded attribute
-      const expanded = faqItem.classList.contains('active');
-      button.setAttribute('aria-expanded', expanded);
+      const expanded = faqItem.classList.contains("active");
+      button.setAttribute("aria-expanded", expanded);
     });
   });
 
   // Back to Top Button
-  const backToTop = document.getElementById('backToTop');
-  
-  window.addEventListener('scroll', () => {
+  const backToTop = document.getElementById("backToTop");
+
+  window.addEventListener("scroll", () => {
     if (window.scrollY > 300) {
-      backToTop.classList.add('visible');
+      backToTop.classList.add("visible");
     } else {
-      backToTop.classList.remove('visible');
+      backToTop.classList.remove("visible");
     }
   });
 
-  backToTop.addEventListener('click', (e) => {
+  backToTop.addEventListener("click", (e) => {
     e.preventDefault();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   });
 
   // Smooth scrolling for anchor links
-  document.querySelectorAll('.toc-link, .category-title, a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-      const targetId = this.getAttribute('href');
-      if (targetId === '#' || targetId === '') return;
-      
-      const target = document.querySelector(targetId);
-      if (target) {
-        e.preventDefault();
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
+  document
+    .querySelectorAll('.toc-link, .category-title, a[href^="#"]')
+    .forEach((anchor) => {
+      anchor.addEventListener("click", function (e) {
+        const targetId = this.getAttribute("href");
+        if (targetId === "#" || targetId === "") return;
+
+        const target = document.querySelector(targetId);
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      });
     });
-  });
 </script>
 {% endblock %}

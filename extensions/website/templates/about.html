@@ -1,13 +1,15 @@
 {% extends '_base.html' %}
-
 {% block title %}About{% endblock %}
-
-{% block style %}
+{% block style%}
 <style>
   .about-hero {
     text-align: center;
     padding: 3rem 1rem;
-    background: linear-gradient(135deg, rgba(15, 118, 110, 0.05) 0%, rgba(6, 182, 212, 0.08) 100%);
+    background: linear-gradient(
+      135deg,
+      rgba(15, 118, 110, 0.05) 0%,
+      rgba(6, 182, 212, 0.08) 100%
+    );
     border-radius: var(--radius-md);
     margin-bottom: 3rem;
   }
@@ -161,7 +163,11 @@
 
   /* Stats Section */
   .stats-section {
-    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    background: linear-gradient(
+      135deg,
+      var(--primary) 0%,
+      var(--primary-dark) 100%
+    );
     border-radius: var(--radius-md);
     padding: 2rem;
     margin: 2rem 0;
@@ -253,44 +259,57 @@
   }
 </style>
 {% endblock %}
-
 {% block content %}
 <div class="contact-wrapper">
   <!-- Hero Section -->
   <div class="about-hero">
     <h1>About Devixa Tech</h1>
     <div class="tagline">Build small. Build useful. Build clean.</div>
-    <p class="description">We're an open-source organization creating lightweight, practical tools that make developers' lives easier.</p>
+    <p class="description">
+      We're an open-source organization creating lightweight, practical tools
+      that make developers' lives easier.
+    </p>
   </div>
 
   <!-- Mission Section -->
   <div class="mission-section">
-    <h2 class="section-title" style="margin-bottom: 0;">Our Mission</h2>
+    <h2 class="section-title" style="margin-bottom: 0">Our Mission</h2>
     <div class="mission-grid">
       <div class="mission-card">
         <div class="mission-icon">🎯</div>
         <h3>Simplify Development</h3>
-        <p>Create tools that reduce boilerplate and complexity, letting developers focus on solving real problems.</p>
+        <p>
+          Create tools that reduce boilerplate and complexity, letting
+          developers focus on solving real problems.
+        </p>
       </div>
       <div class="mission-card">
         <div class="mission-icon">🔓</div>
         <h3>Open Source First</h3>
-        <p>All projects are free, transparent, and community-driven. No hidden costs, no vendor lock-in.</p>
+        <p>
+          All projects are free, transparent, and community-driven. No hidden
+          costs, no vendor lock-in.
+        </p>
       </div>
     </div>
   </div>
 
   <!-- Philosophy Section -->
   <div class="philosophy-section">
-    <h2 class="section-title" style="margin-bottom: 0;">Our Philosophy</h2>
+    <h2 class="section-title" style="margin-bottom: 0">Our Philosophy</h2>
     <div class="philosophy-grid">
       <div class="philosophy-item">
         <h4>💡 Lightweight</h4>
-        <p>No bloat, no unnecessary dependencies. Every line of code serves a purpose.</p>
+        <p>
+          No bloat, no unnecessary dependencies. Every line of code serves a
+          purpose.
+        </p>
       </div>
       <div class="philosophy-item">
         <h4>📖 Readable</h4>
-        <p>Code should be easy to understand, extend, and maintain by anyone.</p>
+        <p>
+          Code should be easy to understand, extend, and maintain by anyone.
+        </p>
       </div>
       <div class="philosophy-item">
         <h4>🔌 Practical</h4>
@@ -298,7 +317,9 @@
       </div>
       <div class="philosophy-item">
         <h4>🤝 Community</h4>
-        <p>Built by developers, for developers. Contributions always welcome.</p>
+        <p>
+          Built by developers, for developers. Contributions always welcome.
+        </p>
       </div>
     </div>
   </div>
@@ -327,17 +348,23 @@
 
   <!-- What We Build Section -->
   <div class="mission-section">
-    <h2 class="section-title" style="margin-bottom: 0;">What We Build</h2>
+    <h2 class="section-title" style="margin-bottom: 0">What We Build</h2>
     <div class="mission-grid">
       <div class="mission-card">
         <div class="mission-icon">🐍</div>
         <h3>Python Libraries</h3>
-        <p>Type-safe, well-documented Python packages for automation and development workflows.</p>
+        <p>
+          Type-safe, well-documented Python packages for automation and
+          development workflows.
+        </p>
       </div>
       <div class="mission-card">
         <div class="mission-icon">🛠️</div>
         <h3>QOL Tools</h3>
-        <p>Quality-of-life utilities that eliminate repetitive tasks and improve developer experience.</p>
+        <p>
+          Quality-of-life utilities that eliminate repetitive tasks and improve
+          developer experience.
+        </p>
       </div>
     </div>
   </div>
@@ -350,7 +377,9 @@
         <div class="team-avatar">👨‍💻</div>
         <h3>Devixa Core Team</h3>
         <div class="team-role">Maintainers</div>
-        <p class="team-bio">A group of passionate developers building tools they wish existed.</p>
+        <p class="team-bio">
+          A group of passionate developers building tools they wish existed.
+        </p>
         <div class="team-social">
           <a href="https://github.com/devixa-tech" target="_blank">🐙 GitHub</a>
         </div>
@@ -359,7 +388,10 @@
         <div class="team-avatar">🌍</div>
         <h3>Community Contributors</h3>
         <div class="team-role">Open Source</div>
-        <p class="team-bio">Thanks to everyone who reports bugs, suggests features, and submits PRs!</p>
+        <p class="team-bio">
+          Thanks to everyone who reports bugs, suggests features, and submits
+          PRs!
+        </p>
         <div class="team-social">
           <a href="#">Become a contributor →</a>
         </div>
@@ -369,56 +401,77 @@
 
   <!-- How to Contribute -->
   <div class="contribution-section">
-    <h2 class="section-title" style="margin-bottom: 0;">How to Contribute</h2>
+    <h2 class="section-title" style="margin-bottom: 0">How to Contribute</h2>
     <div class="contribution-steps">
       <div class="step">
         <div class="step-number">1</div>
         <h4>Find an Issue</h4>
-        <p>Browse our GitHub repositories for open issues or suggest a new feature.</p>
+        <p>
+          Browse our GitHub repositories for open issues or suggest a new
+          feature.
+        </p>
       </div>
       <div class="step">
         <div class="step-number">2</div>
         <h4>Fork & Code</h4>
-        <p>Fork the repo, create a branch, and start coding. Follow our style guides.</p>
+        <p>
+          Fork the repo, create a branch, and start coding. Follow our style
+          guides.
+        </p>
       </div>
       <div class="step">
         <div class="step-number">3</div>
         <h4>Submit a PR</h4>
-        <p>Open a pull request with your changes. We'll review and provide feedback.</p>
+        <p>
+          Open a pull request with your changes. We'll review and provide
+          feedback.
+        </p>
       </div>
     </div>
-    <div style="text-align: center; margin-top: 1rem;">
-      <a href="https://github.com/devixa-tech" target="_blank" class="btn-outline">View All Repositories →</a>
+    <div style="text-align: center; margin-top: 1rem">
+      <a
+        href="https://github.com/devixa-tech"
+        target="_blank"
+        class="btn-outline"
+        >View All Repositories →</a
+      >
     </div>
   </div>
 
   <!-- License Section -->
-  <div style="margin-top: 2rem; padding: 1.5rem; background: var(--gray-50); border-radius: var(--radius-sm); text-align: center;">
-    <p style="color: var(--gray-600);">
-      <strong>⚖️ Open Source License</strong><br>
-      Each repository includes its own license. Most projects use the MIT License.<br>
+  <div
+    style="
+      margin-top: 2rem;
+      padding: 1.5rem;
+      background: var(--gray-50);
+      border-radius: var(--radius-sm);
+      text-align: center;
+    ">
+    <p style="color: var(--gray-600)">
+      <strong>⚖️ Open Source License</strong><br />
+      Each repository includes its own license. Most projects use the MIT
+      License.<br />
       Check individual repositories for specific license terms.
     </p>
   </div>
 </div>
 {% endblock %}
-
 {% block script %}
 <script>
   // Optional: Fetch real stats from GitHub API
   async function fetchGitHubStats() {
     try {
-      const response = await fetch('https://api.github.com/orgs/devixa-tech');
+      const response = await fetch("https://api.github.com/orgs/devixa-tech");
       if (response.ok) {
         const data = await response.json();
         // Update stats dynamically if needed
-        console.log('GitHub stats:', data);
+        console.log("GitHub stats:", data);
       }
     } catch (error) {
-      console.log('Stats will be updated from GitHub API');
+      console.log("Stats will be updated from GitHub API");
     }
   }
-  
+
   // Uncomment to fetch live stats
   // fetchGitHubStats();
 </script>

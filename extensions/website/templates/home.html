@@ -1,21 +1,27 @@
 {% extends '_base.html' %}
-
 {% block title %}Home{% endblock %}
-
 {% block style %}
 <style>
   /* Hero Section */
   .hero-section {
     text-align: center;
     padding: 3rem 1rem 4rem;
-    background: linear-gradient(135deg, rgba(15, 118, 110, 0.03) 0%, rgba(6, 182, 212, 0.05) 100%);
+    background: linear-gradient(
+      135deg,
+      rgba(15, 118, 110, 0.03) 0%,
+      rgba(6, 182, 212, 0.05) 100%
+    );
     border-radius: var(--radius-md);
     margin-bottom: 3rem;
   }
 
   .hero-section h1 {
     font-size: 3rem;
-    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    background: linear-gradient(
+      135deg,
+      var(--primary) 0%,
+      var(--secondary) 100%
+    );
     background-clip: text;
     -webkit-background-clip: text;
     color: transparent;
@@ -39,19 +45,19 @@
   }
 
   /* Featured Image */
-    .featured-image {
-      text-align: center;
-      margin: 2rem 0;
-    }
+  .featured-image {
+    text-align: center;
+    margin: 2rem 0;
+  }
 
-    .featured-image img {
-      width: 80%;
-      height: 200px; 
-      height: auto;
-      border-radius: var(--radius-md);
-      box-shadow: var(--shadow-md);
-      transition: var(--transition);
-    }
+  .featured-image img {
+    width: 80%;
+    height: 200px;
+    height: auto;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    transition: var(--transition);
+  }
 
   /* Section Styles */
   .section-title {
@@ -63,7 +69,7 @@
   }
 
   .section-title::after {
-    content: '';
+    content: "";
     display: block;
     width: 60px;
     height: 3px;
@@ -198,8 +204,8 @@
   }
 
   .automation-section p {
-    font-size: 1.1rem; 
-    margin-bottom: 1rem;  
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
   }
 
   .automation-features {
@@ -287,7 +293,6 @@
   }
 </style>
 {% endblock %}
-
 {% block content %}
 <div class="contact-wrapper">
   <!-- Hero Section -->
@@ -295,18 +300,21 @@
     <span class="hero-badge">✨ Open Source • Lightweight • Practical</span>
     <h1>Devixa Tech</h1>
     <p class="hero-tagline">Build small. Build useful. Build clean.</p>
-    <a href="https://github.com/devixa-tech" target="_blank" rel="noopener noreferrer" class="github-link">
+    <a
+      href="https://github.com/devixa-tech"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="github-link">
       🐙 Explore on GitHub
     </a>
   </div>
 
-
   <!-- Featured Image -->
   <div class="featured-image">
-    <img  src="{{url_for('apps.website.static', filename='image/automation.png')}}" alt="Devixa Automation Platform">
-    <p>
-      Streamline your development workflow
-    </p>
+    <img
+      src="{{url_for('apps.website.static', filename='image/automation.png')}}"
+      alt="Devixa Automation Platform" />
+    <p>Streamline your development workflow</p>
   </div>
 
   <!-- Who is Devixa -->
@@ -314,7 +322,10 @@
     <div class="about-card">
       <div class="about-icon">🎯</div>
       <h3>Who is Devixa Tech?</h3>
-      <p>Devixa Tech is an open-source organization focused on building lightweight, practical, and quality-of-life (QOL) tools for developers.</p>
+      <p>
+        Devixa Tech is an open-source organization focused on building
+        lightweight, practical, and quality-of-life (QOL) tools for developers.
+      </p>
       <p>We create small utilities and reusable modules that aim to:</p>
       <ul class="philosophy-list">
         <li>Simplify everyday development tasks</li>
@@ -327,10 +338,20 @@
     <div class="about-card">
       <div class="about-icon">💡</div>
       <h3>Our Philosophy</h3>
-      <p>We believe good tools don't have to be complex — they just need to solve real problems well. All projects under Devixa Tech are open source, and contributions are always welcome.</p>
-      <p>Whether it's bug reports, feature suggestions, documentation improvements, or code contributions — your input makes Devixa better.</p>
+      <p>
+        We believe good tools don't have to be complex — they just need to solve
+        real problems well. All projects under Devixa Tech are open source, and
+        contributions are always welcome.
+      </p>
+      <p>
+        Whether it's bug reports, feature suggestions, documentation
+        improvements, or code contributions — your input makes Devixa better.
+      </p>
       <div class="about-card-footer">
-        <span>🔓 <strong>Open Source & Community First</strong> — Every project is free, transparent, and built for real-world use.</span>
+        <span
+          >🔓 <strong>Open Source & Community First</strong> — Every project is
+          free, transparent, and built for real-world use.</span
+        >
       </div>
     </div>
   </div>
@@ -338,9 +359,17 @@
   <!-- Automation Focus -->
   <div class="automation-section">
     <h2 class="section-title">⚙️ What This App Does</h2>
-    <p>This application is about <strong>automation around development workflows</strong> — reducing repetitive tasks and improving efficiency.</p>
-    <p>Whether you need to manage APIs, streamline class structures, or integrate with support systems like Zammad, Devixa tools are designed to be <strong>lightweight, typed, and drop-in ready</strong>.</p>
-    
+    <p>
+      This application is about
+      <strong>automation around development workflows</strong> — reducing
+      repetitive tasks and improving efficiency.
+    </p>
+    <p>
+      Whether you need to manage APIs, streamline class structures, or integrate
+      with support systems like Zammad, Devixa tools are designed to be
+      <strong>lightweight, typed, and drop-in ready</strong>.
+    </p>
+
     <div class="automation-features">
       <div class="feature">
         <div class="feature-emoji">🔄</div>
@@ -371,7 +400,10 @@
     <div class="project-card">
       <div class="project-icon">🐍</div>
       <h3>classmods</h3>
-      <p class="project-description">A lightweight Python package designed to enhance class behavior with minimal effort.</p>
+      <p class="project-description">
+        A lightweight Python package designed to enhance class behavior with
+        minimal effort.
+      </p>
       <span class="project-lang">Python 3</span>
       <span class="project-lang">MIT</span>
     </div>
@@ -379,7 +411,10 @@
     <div class="project-card">
       <div class="project-icon">📞</div>
       <h3>py-zammad-cti</h3>
-      <p class="project-description">A lightweight, typed Python client for interacting with Zammad’s Generic CTI API.</p>
+      <p class="project-description">
+        A lightweight, typed Python client for interacting with Zammad’s Generic
+        CTI API.
+      </p>
       <span class="project-lang">Python</span>
       <span class="project-lang">MIT</span>
     </div>
@@ -387,7 +422,10 @@
     <div class="project-card">
       <div class="project-icon">🧩</div>
       <h3>More coming soon</h3>
-      <p class="project-description">We're actively building new QOL tools for developers. Check GitHub for updates!</p>
+      <p class="project-description">
+        We're actively building new QOL tools for developers. Check GitHub for
+        updates!
+      </p>
       <span class="project-lang">JavaScript</span>
       <span class="project-lang">Python</span>
     </div>
@@ -395,16 +433,23 @@
 
   <!-- Call to Action -->
   <div class="call-to-action">
-    <h3 >🤝 Want to contribute or suggest an idea?</h3>
-    <p >Open an issue, start a discussion, or submit a PR — all contributions are welcome.</p>
-    <a href="https://github.com/devixa-tech" target="_blank" rel="noopener noreferrer">Devixa-Tech on GitHub →</a>
+    <h3>🤝 Want to contribute or suggest an idea?</h3>
+    <p>
+      Open an issue, start a discussion, or submit a PR — all contributions are
+      welcome.
+    </p>
+    <a
+      href="https://github.com/devixa-tech"
+      target="_blank"
+      rel="noopener noreferrer"
+      >Devixa-Tech on GitHub →</a
+    >
   </div>
 </div>
 {% endblock %}
-
 {% block script %}
 <script>
   // Any home-specific interactions can go here
-  console.log('Devixa Automation — build small, build useful.');
+  console.log("Devixa Automation — build small, build useful.");
 </script>
 {% endblock %}

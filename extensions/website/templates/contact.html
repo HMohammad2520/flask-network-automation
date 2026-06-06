@@ -1,8 +1,6 @@
 {% extends '_base.html' %}
-
 {% block title %}Contact{% endblock %}
-
-{% block style %}
+{% block style%}
 <style>
   .contact-wrapper {
     max-width: 1280px;
@@ -249,12 +247,13 @@
   }
 </style>
 {% endblock %}
-
 {% block content %}
 <div class="contact-wrapper">
   <div class="contact-header">
     <h1>Get in Touch</h1>
-    <p>Have questions, feedback, or need support? We'd love to hear from you.</p>
+    <p>
+      Have questions, feedback, or need support? We'd love to hear from you.
+    </p>
   </div>
 
   <div class="contact-grid">
@@ -264,22 +263,43 @@
       <form id="contactForm" class="contact-form">
         <div class="form-group">
           <label for="name">Full Name <span class="required">*</span></label>
-          <input type="text" id="name" name="name" placeholder="John Doe" required>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="John Doe"
+            required />
         </div>
 
         <div class="form-group">
-          <label for="email">Email Address <span class="required">*</span></label>
-          <input type="email" id="email" name="email" placeholder="john@example.com" required>
+          <label for="email"
+            >Email Address <span class="required">*</span></label
+          >
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="john@example.com"
+            required />
         </div>
 
         <div class="form-group">
           <label for="subject">Subject</label>
-          <input type="text" id="subject" name="subject" placeholder="What is this regarding?">
+          <input
+            type="text"
+            id="subject"
+            name="subject"
+            placeholder="What is this regarding?" />
         </div>
 
         <div class="form-group">
           <label for="message">Message <span class="required">*</span></label>
-          <textarea id="message" name="message" rows="6" placeholder="Tell us how we can help..." required></textarea>
+          <textarea
+            id="message"
+            name="message"
+            rows="6"
+            placeholder="Tell us how we can help..."
+            required></textarea>
         </div>
 
         <button type="submit" class="submit-btn">Send Message →</button>
@@ -320,46 +340,67 @@
       <div class="faq-preview">
         <h3>Quick answers</h3>
         <ul>
-          <li><a href="{{ url_for('apps.website.faq') }}#getting-started">How do I get started with your tools?</a></li>
-          <li><a href="{{ url_for('apps.website.faq') }}#open-source">Are your tools open source?</a></li>
-          <li><a href="{{ url_for('apps.website.faq') }}#contributing">How can I contribute?</a></li>
-          <li><a href="{{ url_for('apps.website.faq') }}#pricing">What's your pricing model?</a></li>
+          <li>
+            <a href="{{ url_for('apps.website.faq') }}#getting-started"
+              >How do I get started with your tools?</a
+            >
+          </li>
+          <li>
+            <a href="{{ url_for('apps.website.faq') }}#open-source"
+              >Are your tools open source?</a
+            >
+          </li>
+          <li>
+            <a href="{{ url_for('apps.website.faq') }}#contributing"
+              >How can I contribute?</a
+            >
+          </li>
+          <li>
+            <a href="{{ url_for('apps.website.faq') }}#pricing"
+              >What's your pricing model?</a
+            >
+          </li>
         </ul>
-        <a href="{{ url_for('apps.website.faq') }}" class="faq-link">View all FAQs →</a>
+        <a href="{{ url_for('apps.website.faq') }}" class="faq-link"
+          >View all FAQs →</a
+        >
       </div>
     </div>
   </div>
 </div>
 {% endblock %}
-
 {% block script %}
 <script>
-  (function() {
-    const contactForm = document.getElementById('contactForm');
-    
+  (function () {
+    const contactForm = document.getElementById("contactForm");
+
     if (contactForm) {
-      contactForm.addEventListener('submit', function(e) {
+      contactForm.addEventListener("submit", function (e) {
         e.preventDefault();
-        
+
         // Get form values
-        const name = document.getElementById('name').value;
-        const email = document.getElementById('email').value;
-        const subject = document.getElementById('subject').value;
-        const message = document.getElementById('message').value;
+        const name = document.getElementById("name").value;
+        const email = document.getElementById("email").value;
+        const subject = document.getElementById("subject").value;
+        const message = document.getElementById("message").value;
 
         // Simple validation
         if (!name || !email || !message) {
-          alert('Please fill in all required fields (Name, Email, and Message).');
+          alert(
+            "Please fill in all required fields (Name, Email, and Message).",
+          );
           return;
         }
 
-        if (!email.includes('@') || !email.includes('.')) {
-          alert('Please enter a valid email address.');
+        if (!email.includes("@") || !email.includes(".")) {
+          alert("Please enter a valid email address.");
           return;
         }
 
         // Show success message
-        alert(`✨ Thanks ${name}! Your message has been sent.\n\nWe'll respond to ${email} within 24-48 hours.`);
+        alert(
+          `✨ Thanks ${name}! Your message has been sent.\n\nWe'll respond to ${email} within 24-48 hours.`,
+        );
 
         // Clear form (optional)
         contactForm.reset();

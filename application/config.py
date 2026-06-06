@@ -21,7 +21,6 @@ class Config:
         self.flask_debug = debug
         self.flask_secret = secret
 
-
     @ENVMod.register(section_name='general')
     def general(
         self,
@@ -29,12 +28,12 @@ class Config:
     ) -> None:
         self.anonymous_mode = anonymous_mode
 
-
     @ENVMod.register(section_name='database')
     def database(
         self,
         connection_string: str = 'sqlite:///../.db/app.db',
     ) -> None:
         self.connection_string = connection_string
+
 
 cnf = Config()

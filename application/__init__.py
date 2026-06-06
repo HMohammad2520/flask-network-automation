@@ -19,10 +19,11 @@ def create_app(name: str) -> Flask:
 
     return app
 
+
 def add_error_handler(app: Flask) -> Flask:
     @app.errorhandler(Exception)
     def base_error_handler(exp: Exception):
-        ## TODO: Make first and last error code in CNF
+        # TODO: Make first and last error code in CNF
         code = getattr(exp, 'code', 500)
         if 400 < code <= 500:
             timed_uuid = uuid.uuid7()
@@ -37,7 +38,7 @@ def add_error_handler(app: Flask) -> Flask:
                 'traceback': '\n'.join(traceback.format_exception(exp)),
             }
 
-            ## TODO: Add path to cnf
+            # TODO: Add path to cnf
             with open(f'.log/err_{timed_uuid}.json', 'w') as error_file:
                 error_file.write(
                     json.dumps(data, indent=4),
@@ -46,7 +47,8 @@ def add_error_handler(app: Flask) -> Flask:
         raise exp
     return app
 
-def register_extentions(apps_bp: Blueprint, apps_dir: Path | str='extentions') -> List[Blueprint]:
+
+def register_extentions(apps_bp: Blueprint, apps_dir: Path | str = 'extentions') -> List[Blueprint]:
     apps_path = Path(apps_dir)
 
     if not apps_path.exists():
@@ -76,7 +78,11 @@ def register_extentions(apps_bp: Blueprint, apps_dir: Path | str='extentions') -
 
         spec.loader.exec_module(module)
 
-        extention_bp = getattr(module, 'blueprint', getattr(module, 'bp', None))
+        extention_bp = getattr(
+            module, 'blueprint', getattr(
+                module, 'bp', None
+                )
+            )
 
         # Config and Register the blueprint
         if extention_bp:
@@ -86,10 +92,14 @@ def register_extentions(apps_bp: Blueprint, apps_dir: Path | str='extentions') -
 
             apps_bp.register_blueprint(extention_bp)
             blueprints.append(extention_bp)
-            print(f"Registered blueprint: {extention_bp.name} --> apps{extention_bp.url_prefix}")
+            print(
+                f"Registered blueprint: {extention_bp.name} --> apps{extention_bp.url_prefix}"
+            )
 
         else:
-            print(f"No 'bp' or 'blueprint' attribute found in {app_folder.name}")
+            print(
+                f"No 'bp' or 'blueprint' attribute found in {app_folder.name}"
+            )
 
     return blueprints
 

@@ -1,132 +1,148 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
-    <title>
-      Devixa | {% block title %}TITLE{% endblock %}
-      
-    </title>
+    <title>Devixa | {% block title %}TITLE{% endblock %}</title>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <link rel="stylesheet" type="text/css" href="{{ url_for('apps.website.static', filename='css/main.css') }}" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('apps.website.static', filename='css/main.css') }}" />
   </head>
 
   <body>
     {% block header %}
-      <header class="site-header">
-        <div class="container header-inner">
-          <div class="logo-area">
-            <h1>Devixa Tech</h1>
-            <p>Build small • Build useful • Build clean</p>
-          </div>
-          <div class="nav-highlight">
-            <a href="{{ url_for('apps.website.index') }}">Home</a>
-            <a href="{{ url_for('apps.website.contact') }}">Contact</a>
-            <a href="{{ url_for('apps.website.about') }}">About</a>
-            <a href="{{ url_for('apps.website.faq') }}">FAQ</a>
-          </div>
+    <header class="site-header">
+      <div class="container header-inner">
+        <div class="logo-area">
+          <h1>Devixa Tech</h1>
+          <p>Build small • Build useful • Build clean</p>
         </div>
-        {% block style %}
-          <style></style>
-        {% endblock %}
-      </header>
-    {% endblock %}
-
-    {% block breadcrumb %}
-      <!-- BREADCRUMB navigation (hierarchical) -->
-      <div class="breadcrumb-section">
-        <div class="container">
-          <ul class="breadcrumb">
-          <li><a href="{{url_for('apps.website.index')}}">Website</a></li>
-          {% for bread in breadcrumbs %}
-            <li class="{% if bread['url'] == None %}current{% endif %}">
-              {% if bread['url'] != None %}<a href="{{bread['url']}}">{% endif %}
-                {{bread['name']}}
-              {% if bread['url'] != None %}</a>{% endif %}
-            </li>
-          {% endfor %}
-          </ul>
+        <div class="nav-highlight">
+          <a href="{{ url_for('apps.website.index') }}">Home</a>
+          <a href="{{ url_for('apps.website.contact') }}">Contact</a>
+          <a href="{{ url_for('apps.website.about') }}">About</a>
+          <a href="{{ url_for('apps.website.faq') }}">FAQ</a>
         </div>
       </div>
+      {% block style %}
+      <style></style>
+      {% endblock %}
+    </header>
+    {% endblock %}
+    {% block breadcrumb %}
+    <!-- BREADCRUMB navigation (hierarchical) -->
+    <div class="breadcrumb-section">
+      <div class="container">
+        <ul class="breadcrumb">
+          <li><a href="{{url_for('apps.website.index')}}">Website</a></li>
+          {% for bread in breadcrumbs %}
+          <li class="{% if bread['url'] == None %}current{% endif %}">
+            {% if bread['url'] != None %}<a href="{{bread['url']}}"
+              >{% endif %} {{bread['name']}} {% if bread['url'] != None %}</a
+            >{% endif %}
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
     {% endblock %}
 
     <main class="container main-grid">
-      {% block content %}
-
-      {% endblock %}
-
+      {% block content %}{% endblock %}
       {% block sidebar %}
-        <!-- FLOATING SIDEBAR TOGGLE BUTTON -->
-        <button class="sidebar-toggle-btn" id="openSidebarBtn" aria-label="Open sidebar">≡</button>
+      <!-- FLOATING SIDEBAR TOGGLE BUTTON -->
+      <button
+        class="sidebar-toggle-btn"
+        id="openSidebarBtn"
+        aria-label="Open sidebar">
+        ≡
+      </button>
 
-        <!-- SIDEBAR OVERLAY AND DRAWER -->
-        <div class="sidebar-overlay" id="sidebarOverlay">
-          <div class="sidebar-drawer" id="sidebarDrawer">
-            <div class="sidebar-drawer-header">
-              <h3>✨ Navigation Hub</h3>
-              <button class="close-sidebar-btn" id="closeSidebarBtn" aria-label="Close sidebar">×</button>
-            </div>
-            <div class="sidebar-drawer-content">
-              <div class="sidebar-drawer-card">
-                <h3>Weekly digest</h3>
-                <div>
-                  <p>Get fresh news from Devixa Tech on new tools and modules.</p>
-                  <div class="newsletter">
-                    <input type="email" placeholder="your@email.com" id="newsEmailDrawer" />
-                    <button id="subscribeDrawerBtn">Subscribe →</button>
-                    <small>no spam, just news.</small>
-                  </div>
+      <!-- SIDEBAR OVERLAY AND DRAWER -->
+      <div class="sidebar-overlay" id="sidebarOverlay">
+        <div class="sidebar-drawer" id="sidebarDrawer">
+          <div class="sidebar-drawer-header">
+            <h3>✨ Navigation Hub</h3>
+            <button
+              class="close-sidebar-btn"
+              id="closeSidebarBtn"
+              aria-label="Close sidebar">
+              ×
+            </button>
+          </div>
+          <div class="sidebar-drawer-content">
+            <div class="sidebar-drawer-card">
+              <h3>Weekly digest</h3>
+              <div>
+                <p>Get fresh news from Devixa Tech on new tools and modules.</p>
+                <div class="newsletter">
+                  <input
+                    type="email"
+                    placeholder="your@email.com"
+                    id="newsEmailDrawer" />
+                  <button id="subscribeDrawerBtn">Subscribe →</button>
+                  <small>no spam, just news.</small>
                 </div>
               </div>
             </div>
           </div>
         </div>
+      </div>
       {% endblock %}
     </main>
 
     {% block footer %}
-      <footer class="site-footer">
-        <div class="container">
-          <div class="footer-grid">
-            <div class="footer-col">
-              <h4>Devixa Tech</h4>
-              <p>Devixa Tech is an open-source organization focused on building lightweight, practical, and quality-of-life (QOL) tools for developers.</p>
-            </div>
-            <div class="footer-col">
-              <h4>Explore</h4>
-              <a href="{{ url_for('apps.website.index') }}">Home</a>
-              <a href="{{ url_for('apps.website.contact') }}">Contact</a>
-              <a href="{{ url_for('apps.website.about') }}">About</a>
-              <a href="{{ url_for('apps.website.faq') }}">FAQ</a>
-            </div>
-            <div class="footer-col">
-              <h4>Resources</h4>
-              <a href="https://flask.palletsprojects.com/en/stable/">Flask</a>
-              <a href="https://python.org">Python</a>
-              <a href="https://google.github.io/styleguide/">Style guide</a>
-              <a href="https://www.w3schools.com/colors/colors_converter.asp">Color converter</a>
-              <a href="https://dribbble.com/tags/ui">UI examples</a>
-            </div>
-            <div class="footer-col">
-              <h4>Connect</h4>
-              <a href="{{ url_for('apps.website.contact') }}">Contact</a>
-              <a href="https://github.com/devixa-tech">GitHub</a>
-            </div>
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-col">
+            <h4>Devixa Tech</h4>
+            <p>
+              Devixa Tech is an open-source organization focused on building
+              lightweight, practical, and quality-of-life (QOL) tools for
+              developers.
+            </p>
+          </div>
+          <div class="footer-col">
+            <h4>Explore</h4>
+            <a href="{{ url_for('apps.website.index') }}">Home</a>
+            <a href="{{ url_for('apps.website.contact') }}">Contact</a>
+            <a href="{{ url_for('apps.website.about') }}">About</a>
+            <a href="{{ url_for('apps.website.faq') }}">FAQ</a>
+          </div>
+          <div class="footer-col">
+            <h4>Resources</h4>
+            <a href="https://flask.palletsprojects.com/en/stable/">Flask</a>
+            <a href="https://python.org">Python</a>
+            <a href="https://google.github.io/styleguide/">Style guide</a>
+            <a href="https://www.w3schools.com/colors/colors_converter.asp"
+              >Color converter</a
+            >
+            <a href="https://dribbble.com/tags/ui">UI examples</a>
+          </div>
+          <div class="footer-col">
+            <h4>Connect</h4>
+            <a href="{{ url_for('apps.website.contact') }}">Contact</a>
+            <a href="https://github.com/devixa-tech">GitHub</a>
           </div>
         </div>
-      </footer>
-    {% endblock %}
-
-    {% block copyright %}
-      <div class="copyright-bar">
-        <div class="container">
-          <div>© 2026 Devixa-Tech - Powered by Python</div>
-        </div>
       </div>
+    </footer>
+    {% endblock %}
+    {% block copyright %}
+    <div class="copyright-bar">
+      <div class="container">
+        <div>© 2026 Devixa-Tech - Powered by Python</div>
+      </div>
+    </div>
     {% endblock %}
 
     <script src="{{ url_for('apps.website.static', filename='js/main.js') }}"></script>
     {% block script %}
-      <script></script>
+    <script></script>
     {% endblock %}
   </body>
 </html>
