@@ -18,7 +18,7 @@ def main() -> int:
     app = create_app(__name__)
     init_database(app, db)
     add_error_handler(app)
-    register_extentions(apps_bp=apps_bp)
+    register_extentions(apps_bp)
     register_bluprints(app, blueprints)
 
     app.run(
