@@ -143,8 +143,8 @@
 <div class="container">
   <h1>📱 App Selection</h1>
   <div class="sub">Click on Application</div>
-  {% for app in apps %}
   <div class="apps-grid" id="appsGrid">
+    {% for app in apps %}
     <a
       class="app-card"
       href="{{ url_for('apps.'+app.name+'.index') }}"
@@ -163,8 +163,8 @@
         </div>
       </div>
     </a>
-  </div>
   {% endfor %}
+    </div>
   <div class="footer-note">
     🔗 Devixa Tech
   </div>
