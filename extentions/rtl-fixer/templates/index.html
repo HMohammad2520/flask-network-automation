@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>RTL Fixer | تبدیل متن به فرمول خودکار</title>
+    <link rel="stylesheet" href="{{ url_for('apps.rtl-fixer.static', filename='css/main.css') }}">
+  </head>
+  <body>
+    <div class="app-container">
+      <h1>RTL Fixer</h1>
+      <div class="sub">
+        ترکیب کاراکتر های انگلیسی و فارسی بدون از دست دادن ساختار متن
+      </div>
+
+      <div class="button-panel">
+        <button class="action-btn" data-token="FA">فارسی</button>
+        <button class="action-btn" data-token="ENG">انگلیسی</button>
+        <button class="action-btn" data-token="INT">عدد</button>
+        <button class="action-btn" data-token="(">(</button>
+        <button class="action-btn" data-token=")">)</button>
+        <button class="action-btn space-btn" data-token=" ">␣</button>
+        <button class="action-btn" id="textToFormulaBtn">
+          ✨ متن به فرمول
+        </button>
+        <button class="action-btn clear-btn" id="clearBtn">🗑️ حذف</button>
+      </div>
+
+      <div class="formula-bar">
+        <div class="preview-label">
+          📋 ترتیب فعلی (➕ برای درج در میانه - ❌ برای حذف)
+        </div>
+        <div id="chipsWrapper" class="chips-container">
+          <div class="empty-chips">[ خالی ]</div>
+        </div>
+      </div>
+
+      <div class="toggle-container">
+        <label class="toggle-label">
+          <input type="checkbox" id="bidiFixToggle" checked />
+          تبدیل همه کاراکتر ها به فارسی
+        </label>
+        <button id="shareLinkBtn" class="share-btn-action">
+          🔗 لینک اشتراک
+        </button>
+      </div>
+
+      <div class="fields-area" id="dynamicFieldsContainer">
+        <div class="fields-title">✍️ فیلدهای ورودی</div>
+        <div id="fieldsList">⚠️ فرمول یافت نشد</div>
+      </div>
+
+      <div class="final-result" id="finalResultArea">
+        <div class="result-text-wrapper">
+          <div id="finalResultText" style="font-weight: 500">—</div>
+        </div>
+        <button class="copy-btn" id="copyResultBtn">📋 کپی متن</button>
+      </div>
+      <div class="rtl-note">copyright Devixa-Tech</div>
+    </div>
+    <script src="{{ url_for('apps.rtl-fixer.static', filename='js/main.js') }}"></script>
+  </body>
+</html>
