@@ -364,8 +364,7 @@
             const inputElem = document.getElementById(ph.uniqueId);
             if (inputElem) {
                 inputElem.addEventListener("input", (e) => {
-                    let newVal = e.target.value.trim();
-                    e.target.value = newVal;
+                    let newVal = e.target.value;
                     fieldValues[ph.uniqueId] = newVal;
                     const error = validateFieldByType(newVal, ph.type);
                     validationErrors[ph.uniqueId] = error;
@@ -457,6 +456,7 @@
         formulaTokens.push(token);
         rebuildAllFromTokens();
     }
+
     function clearAll() {
         formulaTokens = [];
         fieldValues = {};
@@ -489,7 +489,6 @@
         setTimeout(() => toast.remove(), 2000);
     }
 
-    // ----- Core analyzeTextToFormula (production‑ready version) -----
     function getFirstSignificantChar(word) {
         for (let ch of word) {
             if (/[A-Za-z]/.test(ch) || /[\u0600-\u06FF]/.test(ch)) return ch;
@@ -589,7 +588,7 @@
                 <div class="modal-dialog">
                     <h3 class="modal-title">✨ تبدیل متن به فرمول</h3>
                     <div class="modal-sub">متن خود را وارد کنید (پارسی/انگلیسی/عدد/علائم)</div>
-                    <textarea id="formulaInputText" class="modal-textarea" rows="4" placeholder="مثال: کتاب iPhone 14 Pro Max جدید"></textarea>
+                    <textarea id="formulaInputText" class="modal-textarea" rows="4"></textarea>
                     <div class="modal-buttons">
                         <button id="modalCancelBtn" class="modal-btn modal-btn-secondary">لغو</button>
                         <button id="modalConfirmBtn" class="modal-btn modal-btn-primary">تبدیل</button>
