@@ -1,6 +1,6 @@
 from flask import Blueprint, redirect, render_template, url_for
 
-bp = Blueprint(name='website', import_name=__name__)
+bp = Blueprint('website', __name__)
 
 
 @bp.route('/')
