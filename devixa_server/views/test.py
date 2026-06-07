@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, abort, request
 
-test_bp = Blueprint('test', 'test', url_prefix='/test')
+test_bp = Blueprint('test', __name__)
 
 
 @test_bp.route('/test_error')

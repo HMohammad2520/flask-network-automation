@@ -7,6 +7,7 @@ from .auth import auth_bp
 from .root import root_bp
 from .test import test_bp
 
+
 blueprints: List[Blueprint] = [
     api_bp,
     apps_bp,
@@ -14,5 +15,6 @@ blueprints: List[Blueprint] = [
     root_bp,
     test_bp,
 ]
+
 
 __all__ = ['blueprints', 'apps_bp']

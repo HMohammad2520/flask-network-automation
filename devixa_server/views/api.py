@@ -3,7 +3,7 @@ from typing import Dict, Optional
 from ..models import APIMethod, model_map, db
 from .. import cnf
 
-api_bp = Blueprint('api', 'api', url_prefix='/api')
+api_bp = Blueprint('api', __name__)
 
 """
 @api.errorhandler(Exception)
@@ -18,8 +18,8 @@ def api_error_handler(exp: Exception):
         'description': getattr(exp, 'description', "No more information provided."),
         }
     )
-
 """
+
 
 @api_bp.before_request
 def before_request():
@@ -29,17 +29,19 @@ def before_request():
             return abort(401)
 
         return
-    
+
     token = authorization.split('bearer', 1)
     if len(token) != 2:
         return abort(403)
 
     token = token[1]
-    ## TODO: Check Token Here
+    # TODO: Check Token Here
+
 
 @api_bp.route('/')
 def index():
     return jsonify('Welcome to API')
+
 
 def method_execution(
     model_name: str,
@@ -52,13 +54,13 @@ def method_execution(
 
     if not Model or not method:
         return abort(404)
-    
+
     if pk:
         instance = Model.query.get(pk)
-        
+
         if not instance:
             return abort(404)
-    
+
     allowed_methods = APIMethod.get_request_methods(method)
     kwargs: Dict[str, str] = {}
 
@@ -67,7 +69,7 @@ def method_execution(
 
     if request.method == 'GET':
         kwargs.update(request.args)
-    
+
     elif request.method in ('POST', 'PUT', 'DELETE'):
         if request.is_json:
             kwargs.update(request.json)
@@ -86,11 +88,10 @@ def method_execution(
     return jsonify(result)
 
 
-
 @api_bp.route('/<model_name>/<pk_number>/<method_name>')
 def instance_level_method(model_name: str, pk_number: str, method_name: str):
     try:
-        pk = int(pk_number) 
+        pk = int(pk_number)
 
     except ValueError:
         return abort(501)

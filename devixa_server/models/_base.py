@@ -1,7 +1,6 @@
 from sqlalchemy import Table, Column, Integer, Boolean, Text
 from sqlalchemy.orm import Mapper
 from typing import Any, Optional, List, Any
-from ._column_info import ColumnInfo, base_info, id_info, bool_info
 from ._db import db
 
 class APIMethod:
@@ -55,12 +54,12 @@ class BaseModel(db.Model):
     __mapper__: Mapper
     __abstract__ = True
 
-    id = Column(Integer(), primary_key=True, info=id_info.to_dict())
-    description = Column(Text(), nullable=True, info=base_info.to_dict())
-    deleted = Column(Boolean(), default=False, info=bool_info.to_dict())
-    readble = Column(Boolean(), default=False, info=bool_info.to_dict())
-    deletable = Column(Boolean(), default=True, info=bool_info.to_dict())
-    updatable = Column(Boolean(), default=True, info=bool_info.to_dict())
+    id = Column(Integer(), primary_key=True)
+    description = Column(Text(), nullable=True)
+    deleted = Column(Boolean(), default=False)
+    readble = Column(Boolean(), default=False)
+    deletable = Column(Boolean(), default=True)
+    updatable = Column(Boolean(), default=True)
 
     def to_dict(self):
         result = {}
@@ -153,21 +152,6 @@ class BaseModel(db.Model):
         }
 
     def __setattr__(self, name: str, value: Any) -> None:
-        column = self.__table__.columns.get(name)
-
-        if column is not None:
-            info: ColumnInfo = column.info.get(ColumnInfo._index, base_info)
-
-            if info.normalizer:
-                value = info.normalizer(value)
-            
-            if info.converter:
-                value = info.converter(value)
-            
-            if info.validator:
-                if not info.validator(value):
-                    raise ValueError(f'Value did not validated with: `{info.validator.__qualname__}` --> {value=}')
-
         return super().__setattr__(name, value)
 
     def __str__(self) -> str:
@@ -181,13 +165,5 @@ class BaseModel(db.Model):
             raise RuntimeError(
                 f'Model `{cls.__name__}` should have `__tablename__` attribute.'
             )
-
-        '''
-        for column in cls.__table__.columns:
-            if not column.info or not isinstance(column.info[ColumnInfo._index], ColumnInfo):
-                raise RuntimeError(
-                    f'Column `{column}` in Model {cls.__name__} must have `ColumnInfo` set in `info` parameter'
-                )
-        '''
 
         return super().__init_subclass__()

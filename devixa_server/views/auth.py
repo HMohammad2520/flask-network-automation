@@ -1,6 +1,6 @@
 from flask import Blueprint, request, abort
 
-auth_bp = Blueprint('auth', 'auth', url_prefix='/auth')
+auth_bp = Blueprint('auth', __name__)
 
 @auth_bp.route('/login', methods=['POST'])
 def login():

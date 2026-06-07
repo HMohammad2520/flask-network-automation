@@ -13,7 +13,11 @@ from .models import db
 
 
 def create_app(name: str) -> Flask:
-    app = Flask(name)
+    app = Flask(
+        name,
+        static_folder='application/static',
+        template_folder='application/templates',
+    )
     app.secret_key = cnf.flask_secret
     app.config['SQLALCHEMY_DATABASE_URI'] = cnf.connection_string
 
@@ -93,7 +97,7 @@ def register_extentions(apps_bp: Blueprint, apps_dir: Path | str = 'extentions')
             apps_bp.register_blueprint(extention_bp)
             blueprints.append(extention_bp)
             print(
-                f"Registered blueprint: {extention_bp.name} --> apps{extention_bp.url_prefix}"
+                f"Registered blueprint: apps{extention_bp.url_prefix}"
             )
 
         else:
@@ -106,6 +110,9 @@ def register_extentions(apps_bp: Blueprint, apps_dir: Path | str = 'extentions')
 
 def register_bluprints(app: Flask, bluprints: list[Blueprint]) -> Flask:
     for blueprint in bluprints:
+        if not blueprint.name == 'root':
+            blueprint.url_prefix = '/' + blueprint.name
+
         app.register_blueprint(blueprint)
 
     return app
