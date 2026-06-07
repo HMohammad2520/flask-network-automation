@@ -2,6 +2,7 @@ from flask import Blueprint, request, abort
 
 auth_bp = Blueprint('auth', __name__)
 
+
 @auth_bp.route('/login', methods=['POST'])
 def login():
     username = request.form.get('username')

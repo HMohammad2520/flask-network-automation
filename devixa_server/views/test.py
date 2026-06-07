@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, abort, request
+from flask import Blueprint, abort, request
 
 test_bp = Blueprint('test', __name__)
 

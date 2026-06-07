@@ -1,7 +1,4 @@
 from flask import Blueprint, redirect, url_for, jsonify
-from application import get_version
-from typing import Dict, Any
-
 
 root_bp = Blueprint('root', __name__)
 
