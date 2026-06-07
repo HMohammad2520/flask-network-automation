@@ -1,0 +1,36 @@
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>Devixa Tech</h4>
+        <p>
+          Devixa Tech is an open-source organization focused on building
+          lightweight, practical, and quality-of-life (QOL) tools for
+          developers.
+        </p>
+      </div>
+      <div class="footer-col">
+        <h4>Explore</h4>
+        <a href="{{ url_for('apps.website.static', filename='css/main.css') }}9">Home</a>
+        <a href="{{ url_for('apps.website.contact') }}">Contact</a>
+        <a href="{{ url_for('apps.website.about') }}">About</a>
+        <a href="{{ url_for('apps.website.faq') }}">FAQ</a>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <a href="https://flask.palletsprojects.com/en/stable/">Flask</a>
+        <a href="https://python.org">Python</a>
+        <a href="https://google.github.io/styleguide/">Style guide</a>
+        <a href="https://www.w3schools.com/colors/colors_converter.asp">
+          Color converter
+        </a>
+        <a href="https://dribbble.com/tags/ui">UI examples</a>
+      </div>
+      <div class="footer-col">
+        <h4>Connect</h4>
+        <a href="{{ url_for('apps.website.contact') }}">Contact</a>
+        <a href="https://github.com/devixa-tech">GitHub</a>
+      </div>
+    </div>
+  </div>
+</footer>

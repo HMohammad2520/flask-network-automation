@@ -1,0 +1,713 @@
+{% extends 'website/_base.html' %}
+{% block title %}FAQ{% endblock %} 
+{% block style %}
+<style>
+  .faq-wrapper {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+  }
+
+  .faq-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .faq-header h1 {
+    font-size: 2.5rem;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+  }
+
+  .faq-header p {
+    font-size: 1.1rem;
+    color: var(--gray-500);
+  }
+
+  /* Table of Contents (Anchor Links) */
+  .toc-section {
+    background: var(--gray-50);
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    border: 1px solid var(--gray-200);
+  }
+
+  .toc-section h2 {
+    color: var(--primary);
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .toc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 0.8rem;
+  }
+
+  .toc-link {
+    display: block;
+    padding: 0.5rem 1rem;
+    color: var(--gray-700);
+    text-decoration: none;
+    transition: var(--transition);
+    border-left: 3px solid transparent;
+  }
+
+  .toc-link:hover {
+    color: var(--primary);
+    border-left-color: var(--secondary);
+    padding-left: 1.5rem;
+    background: var(--white);
+  }
+
+  /* FAQ Categories */
+  .faq-category {
+    margin-bottom: 3rem;
+  }
+
+  .category-title {
+    font-size: 1.8rem;
+    color: var(--primary);
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--secondary);
+    display: inline-block;
+  }
+
+  /* FAQ Items */
+  .faq-item {
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius-md);
+    margin-bottom: 1rem;
+    overflow: hidden;
+    transition: var(--transition);
+  }
+
+  .faq-item:hover {
+    box-shadow: var(--shadow-sm);
+  }
+
+  .faq-question {
+    width: 100%;
+    text-align: left;
+    padding: 1.2rem 1.5rem;
+    background: var(--white);
+    border: none;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--gray-900);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: var(--transition);
+  }
+
+  .faq-question:hover {
+    background: var(--gray-50);
+    color: var(--primary);
+  }
+
+  .faq-question .indicator {
+    font-size: 1.2rem;
+    transition: transform 0.2s ease;
+    color: var(--secondary);
+  }
+
+  .faq-item.active .faq-question .indicator {
+    transform: rotate(45deg);
+  }
+
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    background: var(--gray-50);
+    border-top: 1px solid transparent;
+  }
+
+  .faq-item.active .faq-answer {
+    max-height: 500px;
+    border-top-color: var(--gray-200);
+  }
+
+  .faq-answer-content {
+    padding: 1.2rem 1.5rem;
+    line-height: 1.6;
+    color: var(--gray-700);
+  }
+
+  .faq-answer-content a {
+    color: var(--primary);
+    text-decoration: none;
+  }
+
+  .faq-answer-content a:hover {
+    color: var(--secondary);
+    text-decoration: underline;
+  }
+
+  .faq-answer-content ul,
+  .faq-answer-content ol {
+    margin: 0.5rem 0 0.5rem 1.5rem;
+  }
+
+  .faq-answer-content li {
+    margin: 0.3rem 0;
+  }
+
+  .code-block {
+    background: var(--gray-900);
+    color: #e2e8f0;
+    padding: 0.8rem;
+    border-radius: var(--radius-sm);
+    font-family: monospace;
+    font-size: 0.85rem;
+    overflow-x: auto;
+    margin: 0.5rem 0;
+  }
+
+  /* Back to Top Button */
+  .back-to-top {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    background: var(--primary);
+    color: white;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: var(--transition);
+    z-index: 98;
+    box-shadow: var(--shadow-md);
+  }
+
+  .back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .back-to-top:hover {
+    background: var(--primary-dark);
+    transform: translateY(-3px);
+  }
+
+  /* Still Have Questions Section */
+  .contact-cta {
+    text-align: center;
+    background: linear-gradient(135deg, var(--gray-50) 0%, var(--white) 100%);
+    padding: 2rem;
+    border-radius: var(--radius-md);
+    margin-top: 2rem;
+    border: 1px solid var(--gray-200);
+  }
+
+  .contact-cta h3 {
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+  }
+
+  .contact-cta .btn-outline {
+    display: inline-block;
+    margin-top: 1rem;
+    background: transparent;
+    border: 2px solid var(--primary);
+    color: var(--primary);
+    padding: 0.6rem 1.4rem;
+    border-radius: 2rem;
+    text-decoration: none;
+    transition: var(--transition);
+  }
+
+  .contact-cta .btn-outline:hover {
+    background: var(--primary);
+    color: white;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .faq-header h1 {
+      font-size: 1.8rem;
+    }
+
+    .category-title {
+      font-size: 1.4rem;
+    }
+
+    .faq-question {
+      font-size: 0.9rem;
+      padding: 1rem;
+    }
+
+    .back-to-top {
+      bottom: 5rem;
+      right: 1rem;
+    }
+  }
+</style>
+{% endblock %}
+{% block content %}
+<div class="faq-wrapper">
+  <!-- FAQ Header -->
+  <div class="faq-header">
+    <h1>Frequently Asked Questions</h1>
+    <p>
+      Everything you need to know about Devixa tools and automation platform
+    </p>
+  </div>
+
+  <!-- Table of Contents (Anchor Links for Accessibility) -->
+  <div class="toc-section" aria-label="Table of Contents">
+    <h2>
+      <span>📑</span>
+      Jump to Section
+    </h2>
+    <div class="toc-grid">
+      <a href="#getting-started" class="toc-link">🚀 Getting Started</a>
+      <a href="#open-source" class="toc-link">🔓 Open Source</a>
+      <a href="#contributing" class="toc-link">🤝 Contributing</a>
+      <a href="#pricing" class="toc-link">💰 Pricing & Licensing</a>
+      <a href="#technical" class="toc-link">⚙️ Technical</a>
+      <a href="#support" class="toc-link">🎧 Support</a>
+    </div>
+  </div>
+
+  <!-- Category 1: Getting Started -->
+  <div id="getting-started" class="faq-category">
+    <h2 class="category-title">🚀 Getting Started</h2>
+
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        How do I get started with your tools?
+        <span class="indicator">+</span>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-content">
+          <p>
+            Getting started with Devixa tools is simple! Here's a quick guide:
+          </p>
+          <ol>
+            <li>
+              <strong>Browse our repositories</strong> on
+              <a href="https://github.com/devixa-tech">GitHub</a> to find the
+              tool you need
+            </li>
+            <li><strong>Install via pip</strong> (for Python packages):</li>
+          </ol>
+          <div class="code-block">pip install classmods</div>
+          <p>Or for py-zammad-cti:</p>
+          <div class="code-block">pip install py-zammad-cti</div>
+          <ol start="3">
+            <li>
+              <strong>Check the documentation</strong> in each repository's
+              README
+            </li>
+            <li><strong>Explore examples</strong> to see the tool in action</li>
+          </ol>
+          <p>
+            All our tools are designed to be lightweight and easy to integrate
+            into existing projects.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        Do I need any special dependencies?
+        <span class="indicator">+</span>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-content">
+          <p>
+            We keep dependencies minimal by design. Most Devixa tools have
+            <strong>zero or very few external dependencies</strong>.
+            Requirements are always listed in the
+            <code>requirements.txt</code> or <code>pyproject.toml</code> file of
+            each repository.
+          </p>
+          <p>For example:</p>
+          <ul>
+            <li><strong>classmods</strong> - No external dependencies</li>
+            <li>
+              <strong>py-zammad-cti</strong> - Only requires
+              <code>requests</code> library
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Category 2: Open Source -->
+  <div id="open-source" class="faq-category">
+    <h2 class="category-title">🔓 Open Source</h2>
+
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        Are your tools open source?
+        <span class="indicator">+</span>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-content">
+          <p>
+            <strong>Yes, absolutely!</strong> All Devixa Tech projects are 100%
+            open source.
+          </p>
+          <p>
+            Our repositories are publicly available on
+            <a href="https://github.com/devixa-tech">GitHub</a>, and you can:
+          </p>
+          <ul>
+            <li>View all source code</li>
+            <li>Fork and modify for your needs</li>
+            <li>Use in commercial projects (MIT License)</li>
+            <li>Learn from our implementation patterns</li>
+          </ul>
+          <p>
+            We believe transparency and community collaboration make better
+            software.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        What license do you use?
+        <span class="indicator">+</span>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-content">
+          <p>
+            Most Devixa projects use the <strong>MIT License</strong>, which is
+            one of the most permissive open source licenses.
+          </p>
+          <p>This means you can:</p>
+          <ul>
+            <li>✅ Use the software commercially</li>
+            <li>✅ Modify the source code</li>
+            <li>✅ Distribute your modifications</li>
+            <li>✅ Use in proprietary projects</li>
+          </ul>
+          <p>
+            The only requirement is to include the original copyright notice.
+            Check each repository for its specific license terms.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Category 3: Contributing -->
+  <div id="contributing" class="faq-category">
+    <h2 class="category-title">🤝 Contributing</h2>
+
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        How can I contribute?
+        <span class="indicator">+</span>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-content">
+          <p>We welcome contributions of all kinds! Here's how you can help:</p>
+          <ul>
+            <li><strong>🐛 Report bugs</strong> - Open an issue on GitHub</li>
+            <li>
+              <strong>💡 Suggest features</strong> - Start a discussion or open
+              a feature request
+            </li>
+            <li>
+              <strong>📝 Improve documentation</strong> - Fix typos, add
+              examples, clarify explanations
+            </li>
+            <li>
+              <strong>💻 Submit code</strong> - Fork a repository, make changes,
+              and submit a Pull Request
+            </li>
+            <li>
+              <strong>🌍 Spread the word</strong> - Star our repos, share with
+              colleagues, write about us
+            </li>
+          </ul>
+          <p>
+            Check our <a href="#">Contributing Guide</a> for detailed
+            instructions and coding standards.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        What are the guidelines for pull requests?
+        <span class="indicator">+</span>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-content">
+          <p>
+            To ensure quality and consistency, please follow these guidelines:
+          </p>
+          <ol>
+            <li>
+              <strong>Keep it focused</strong> - One feature or fix per PR
+            </li>
+            <li>
+              <strong>Write tests</strong> - If applicable, include tests for
+              your changes
+            </li>
+            <li>
+              <strong>Update documentation</strong> - Keep README and docstrings
+              current
+            </li>
+            <li>
+              <strong>Follow style</strong> - Match existing code style (PEP 8
+              for Python)
+            </li>
+            <li>
+              <strong>Describe your changes</strong> - Explain what and why in
+              the PR description
+            </li>
+          </ol>
+          <p>
+            All contributions will be reviewed by maintainers. Don't hesitate to
+            ask questions!
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Category 4: Pricing -->
+  <div id="pricing" class="faq-category">
+    <h2 class="category-title">💰 Pricing & Licensing</h2>
+
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        What's your pricing model?
+        <span class="indicator">+</span>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-content">
+          <p><strong>All Devixa tools are completely free!</strong> 🎉</p>
+          <p>
+            We believe great developer tools should be accessible to everyone.
+            There's no pricing model because:
+          </p>
+          <ul>
+            <li>All projects are open source (MIT License)</li>
+            <li>No hidden fees or premium tiers</li>
+            <li>No paywalls for features</li>
+            <li>No usage limits or restrictions</li>
+          </ul>
+          <p>
+            If you find our tools valuable, consider
+            <a href="#contributing">contributing</a> or starring our
+            repositories. That's the best support!
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        Can I use your tools in commercial projects?
+        <span class="indicator">+</span>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-content">
+          <p>
+            <strong>Yes, absolutely!</strong> The MIT license allows commercial
+            use without restrictions.
+          </p>
+          <p>You can integrate Devixa tools into:</p>
+          <ul>
+            <li>Proprietary software</li>
+            <li>SaaS products</li>
+            <li>Enterprise applications</li>
+            <li>Any commercial project</li>
+          </ul>
+          <p>
+            The only requirement is to include the original copyright notice. No
+            need to share your source code or pay any fees.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Category 5: Technical -->
+  <div id="technical" class="faq-category">
+    <h2 class="category-title">⚙️ Technical</h2>
+
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        Which Python versions are supported?
+        <span class="indicator">+</span>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-content">
+          <p>
+            We support <strong>Python 3.8 and above</strong> for all our Python
+            packages.
+          </p>
+          <p>Testing is performed regularly on:</p>
+          <ul>
+            <li>Python 3.8</li>
+            <li>Python 3.9</li>
+            <li>Python 3.10</li>
+            <li>Python 3.11</li>
+            <li>Python 3.12</li>
+          </ul>
+          <p>
+            We recommend using the latest stable Python version for best
+            performance and security.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        How do I report a security issue?
+        <span class="indicator">+</span>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-content">
+          <p>For security concerns, please follow responsible disclosure:</p>
+          <ol>
+            <li><strong>DO NOT</strong> open a public GitHub issue</li>
+            <li>
+              <strong>Email us directly</strong> at
+              <a href="mailto:security@devixa.tech">security@devixa.tech</a>
+            </li>
+            <li>Provide detailed information about the vulnerability</li>
+            <li>Allow us time to investigate and patch (usually 7-14 days)</li>
+          </ol>
+          <p>
+            We take security seriously and will acknowledge your report within
+            48 hours.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Category 6: Support -->
+  <div id="support" class="faq-category">
+    <h2 class="category-title">🎧 Support</h2>
+
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false">
+        How can I get help?
+        <span class="indicator">+</span>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-content">
+          <p>We offer several support channels:</p>
+          <ul>
+            <li>
+              <strong>GitHub Issues</strong> - For bug reports and feature
+              requests
+            </li>
+            <li>
+              <strong>GitHub Discussions</strong> - For questions and community
+              help
+            </li>
+            <li>
+              <strong>Documentation</strong> - Check README files in each
+              repository
+            </li>
+            <li>
+              <strong>Email</strong> -
+              <a href="mailto:support@devixa.tech">support@devixa.tech</a> for
+              direct inquiries
+            </li>
+          </ul>
+          <p>
+            We aim to respond to all inquiries within 24-48 hours
+            (Monday-Friday).
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Still Have Questions Section -->
+  <div class="contact-cta">
+    <h3>❓ Still have questions?</h3>
+    <p>Can't find what you're looking for? We're here to help!</p>
+    <a href="{{ url_for('apps.website.contact') }}" class="btn-outline"
+      >Contact Us →</a
+    >
+  </div>
+</div>
+
+<!-- Back to Top Button -->
+<a href="#" id="backToTop" class="back-to-top" aria-label="Back to top">↑</a>
+{% endblock %}
+{% block script %}
+<script>
+  // FAQ Accordion Functionality
+  document.querySelectorAll(".faq-question").forEach((button) => {
+    button.addEventListener("click", () => {
+      const faqItem = button.closest(".faq-item");
+      const isActive = faqItem.classList.contains("active");
+
+      // Optional: Close other items (uncomment for single-open behavior)
+      // document.querySelectorAll('.faq-item').forEach(item => {
+      //   if (item !== faqItem) item.classList.remove('active');
+      // });
+
+      faqItem.classList.toggle("active");
+
+      // Update aria-expanded attribute
+      const expanded = faqItem.classList.contains("active");
+      button.setAttribute("aria-expanded", expanded);
+    });
+  });
+
+  // Back to Top Button
+  const backToTop = document.getElementById("backToTop");
+
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 300) {
+      backToTop.classList.add("visible");
+    } else {
+      backToTop.classList.remove("visible");
+    }
+  });
+
+  backToTop.addEventListener("click", (e) => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+
+  // Smooth scrolling for anchor links
+  document
+    .querySelectorAll('.toc-link, .category-title, a[href^="#"]')
+    .forEach((anchor) => {
+      anchor.addEventListener("click", function (e) {
+        const targetId = this.getAttribute("href");
+        if (targetId === "#" || targetId === "") return;
+
+        const target = document.querySelector(targetId);
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      });
+    });
+</script>
+{% endblock %}

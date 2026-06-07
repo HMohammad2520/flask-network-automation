@@ -1,6 +1,6 @@
 import sys
 from classmods import ENVMod
-from application import (
+from devixa_server import (
     cnf,
     db,
     blueprints,

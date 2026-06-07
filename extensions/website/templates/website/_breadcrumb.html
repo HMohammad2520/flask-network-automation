@@ -1,0 +1,14 @@
+<div class="breadcrumb-section">
+  <div class="container">
+    <ul class="breadcrumb">
+      <li><a href="{{url_for('apps.website.index')}}">Website</a></li>
+      {% for bread in breadcrumbs %}
+      <li class="{% if bread['url'] == None %}current{% endif %}">
+        {% if bread['url'] != None %}
+        <a href="{{bread['url']}}">{% endif %} {{bread['name']}} {% if bread['url'] != None %}</a>
+        {% endif %}
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
