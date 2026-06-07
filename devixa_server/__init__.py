@@ -15,8 +15,8 @@ from .models import db
 def create_app(name: str) -> Flask:
     app = Flask(
         name,
-        static_folder='application/static',
-        template_folder='application/templates',
+        static_folder='devixa_server/static',
+        template_folder='devixa_server/templates',
     )
     app.secret_key = cnf.flask_secret
     app.config['SQLALCHEMY_DATABASE_URI'] = cnf.connection_string
@@ -52,11 +52,11 @@ def add_error_handler(app: Flask) -> Flask:
     return app
 
 
-def register_extentions(apps_bp: Blueprint, apps_dir: Path | str = 'extentions') -> List[Blueprint]:
+def register_extentions(apps_bp: Blueprint, apps_dir: Path | str = 'extensions') -> List[Blueprint]:
     apps_path = Path(apps_dir)
 
     if not apps_path.exists():
-        raise RuntimeError('Extentions Folder Should exist.')
+        raise RuntimeError('Extensions Folder Should exist.')
 
     blueprints = []
     # Iterate through each subfolder in apps directory

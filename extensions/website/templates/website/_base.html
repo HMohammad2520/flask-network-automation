@@ -1,0 +1,22 @@
+{% extends "_base.html" %}
+{% block title %}Website{% endblock %}
+{% block head %}
+  <link rel="stylesheet" type="text/css" href="{{ url_for('apps.website.static', filename='css/main.css') }}" />
+{% endblock %}
+
+{% block body %}
+    {% block header %}{% include 'website/_header.html' %}{% endblock %}
+    {% block breadcrumb %}{% include 'website/_breadcrumb.html' %}{% endblock %}
+    {% block main %}
+    <main class="container main-grid">
+      {% block content %}<!-- No Content - BASE Template rendered -->{% endblock %}
+      {% block sidebar %}{% include 'website/_sidebar.html' %}{% endblock %}
+    </main>
+    {% endblock %}
+
+    {% block footer %}{% include 'website/_footer.html' %}{% endblock %}
+    {% block copyright %}{% include 'website/_copyright.html' %}{% endblock %}
+
+    <script src="{{ url_for('apps.website.static', filename='js/main.js') }}"></script>
+    {% block script %}<script></script>{% endblock %}
+{%endblock %}

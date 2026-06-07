@@ -1,6 +1,10 @@
 from flask import Blueprint, redirect, render_template, url_for
 
 bp = Blueprint('website', __name__)
+bp.label = 'Web Application'  #type: ignore
+bp.description = 'Devixa website'  #type: ignore
+bp.author = 'Devixa'  #type: ignore
+bp.icon = 'W' #type: ignore
 
 
 @bp.route('/')
