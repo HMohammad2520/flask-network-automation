@@ -1,4 +1,4 @@
-from flask import Blueprint, request, redirect, url_for, jsonify, abort
+from flask import Blueprint, redirect, url_for, jsonify
 from application import get_version
 from typing import Dict, Any
 
@@ -11,9 +11,9 @@ ATTRIBS: Dict[str, Any] = {
 
 @root_bp.route('/')
 @root_bp.route('/website')
-@root_bp.route('/website/<all>')
-def index(all=None):
-    return redirect(url_for(f'apps.website.{all or 'index'}'))
+@root_bp.route('/website/<page>')
+def index(page=None):
+    return redirect(url_for(f'apps.website.{page or 'index'}'))
 
 @root_bp.route('/favicon.ico')
 def favicon():
