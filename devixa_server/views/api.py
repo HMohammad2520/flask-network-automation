@@ -88,7 +88,7 @@ def method_execution(
     return jsonify(result)
 
 
-@api_bp.route('/<model_name>/<pk_number>/<method_name>')
+@api_bp.route('/<model_name>/<pk_number>/<method_name>', methods=['GET', 'POST', 'PUT', 'DELETE'])
 def instance_level_method(model_name: str, pk_number: str, method_name: str):
     try:
         pk = int(pk_number)
@@ -99,6 +99,6 @@ def instance_level_method(model_name: str, pk_number: str, method_name: str):
     return method_execution(model_name, method_name, pk)
 
 
-@api_bp.route('/<model_name>/<method_name>')
+@api_bp.route('/<model_name>/<method_name>', methods=['GET', 'POST', 'PUT', 'DELETE'])
 def class_level_method(model_name, method_name):
     return method_execution(model_name, method_name)

@@ -71,7 +71,7 @@ class BaseModel(db.Model):
         return result
 
     @classmethod
-    @APIMethod(request_methods=['GET', 'POST'])
+    @APIMethod(request_methods=['POST'])
     def create(cls, **kwargs):
         instance = cls(**kwargs)
 
@@ -94,22 +94,24 @@ class BaseModel(db.Model):
         if not bool(self.updatable) and not force:
             raise PermissionError(f'This object is readonly: {self}')
 
+        # Get all column names from the table
+        allowed_columns = [col.name for col in self.__table__.columns]
+        
         for k, v in kwargs.items():
+            if k not in allowed_columns:
+                raise PermissionError(f'Not allowed to change this attribute: {k}')
+            
             if not hasattr(self, k):
-                raise AttributeError(f'')
-
-            if not isinstance(getattr(self, k), Column):
-                raise AttributeError(f'')
-
+                raise AttributeError(f'Model does not have attribute: {k}')
+            
             setattr(self, k, v)
 
         db.session.add(self)
         db.session.commit()
 
-        kwargs = {k: getattr(self, k) for k in kwargs.keys()}
-        kwargs.update(id=self.id)
-
-        return kwargs
+        result = {k: getattr(self, k) for k in kwargs.keys()}
+        result['id'] = self.id
+        return result
 
     @APIMethod(request_methods=['DELETE'])
     def delete(self, force=False, eager=False):
