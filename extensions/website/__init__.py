@@ -2,7 +2,7 @@ from flask import Blueprint, redirect, render_template, url_for
 
 bp = Blueprint('website', __name__)
 bp.label = 'Web Application'  #type: ignore
-bp.description = 'Devixa website'  #type: ignore
+bp.description = 'Devixa Tech is an open-source organization focused on building lightweight, practical, and quality-of-life (QOL) tools for developers.'  #type: ignore
 bp.author = 'Devixa'  #type: ignore
 bp.icon = 'W' #type: ignore
 
