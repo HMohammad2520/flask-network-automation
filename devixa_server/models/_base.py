@@ -3,6 +3,7 @@ from sqlalchemy.orm import Mapper
 from typing import Any, Optional, List, Any
 from ._db import db
 
+
 class APIMethod:
     def __init__(
         self,
@@ -49,10 +50,12 @@ class APIMethod:
     def get_request_methods(cls, func):
         return getattr(func, '_request_methods')
 
+
 class BaseModel(db.Model):
     __table__: Table
     __mapper__: Mapper
     __abstract__ = True
+    _column_names = None
 
     id = Column(Integer(), primary_key=True)
     description = Column(Text(), nullable=True)
@@ -70,8 +73,15 @@ class BaseModel(db.Model):
 
         return result
 
+    @property
+    def column_names(self) -> List[str]:
+        if self._column_names is None:
+            self._column_names = [col.name for col in self.__table__.columns]
+        
+        return self._column_names
+
     @classmethod
-    @APIMethod(request_methods=['GET', 'POST'])
+    @APIMethod(request_methods=['POST'])
     def create(cls, **kwargs):
         instance = cls(**kwargs)
 
@@ -95,21 +105,24 @@ class BaseModel(db.Model):
             raise PermissionError(f'This object is readonly: {self}')
 
         for k, v in kwargs.items():
-            if not hasattr(self, k):
-                raise AttributeError(f'')
+            if k not in self.column_names:
+                raise PermissionError(
+                    f'Not allowed to change this attribute: {k}'
+                )
 
-            if not isinstance(getattr(self, k), Column):
-                raise AttributeError(f'')
+            if not hasattr(self, k):
+                raise AttributeError(
+                    f'Model does not have attribute: {k}'
+                )
 
             setattr(self, k, v)
 
         db.session.add(self)
         db.session.commit()
 
-        kwargs = {k: getattr(self, k) for k in kwargs.keys()}
-        kwargs.update(id=self.id)
-
-        return kwargs
+        result = {k: getattr(self, k) for k in kwargs.keys()}
+        result['id'] = self.id
+        return result
 
     @APIMethod(request_methods=['DELETE'])
     def delete(self, force=False, eager=False):

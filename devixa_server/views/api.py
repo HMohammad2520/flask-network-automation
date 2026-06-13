@@ -5,8 +5,7 @@ from .. import cnf
 
 api_bp = Blueprint('api', __name__)
 
-"""
-@api.errorhandler(Exception)
+@api_bp.errorhandler(Exception)
 def api_error_handler(exp: Exception):
     if current_app.debug:
         raise exp
@@ -18,7 +17,7 @@ def api_error_handler(exp: Exception):
         'description': getattr(exp, 'description', "No more information provided."),
         }
     )
-"""
+
 
 
 @api_bp.before_request
@@ -26,13 +25,18 @@ def before_request():
     authorization = request.headers.get('Authorization')
     if not authorization:
         if not cnf.anonymous_mode:
-            return abort(401)
+            return abort(403, description="Invalid Authorization header format. Use 'Bearer <token>'")
 
         return
 
-    token = authorization.split('bearer', 1)
-    if len(token) != 2:
-        return abort(403)
+    # Current (broken):
+    token = authorization.split('bearer', 1)  # This looks for string 'bearer' to split on
+
+    # Fixed:
+    parts = authorization.split(' ')
+    if len(parts) != 2 or parts[0].lower() != 'bearer':
+        return abort(403, description="Invalid Authorization header")
+    token = parts[1]
 
     token = token[1]
     # TODO: Check Token Here
@@ -88,7 +92,7 @@ def method_execution(
     return jsonify(result)
 
 
-@api_bp.route('/<model_name>/<pk_number>/<method_name>')
+@api_bp.route('/<model_name>/<pk_number>/<method_name>', methods=['GET', 'POST', 'PUT', 'DELETE'])
 def instance_level_method(model_name: str, pk_number: str, method_name: str):
     try:
         pk = int(pk_number)
@@ -99,6 +103,6 @@ def instance_level_method(model_name: str, pk_number: str, method_name: str):
     return method_execution(model_name, method_name, pk)
 
 
-@api_bp.route('/<model_name>/<method_name>')
+@api_bp.route('/<model_name>/<method_name>', methods=['GET', 'POST', 'PUT', 'DELETE'])
 def class_level_method(model_name, method_name):
     return method_execution(model_name, method_name)

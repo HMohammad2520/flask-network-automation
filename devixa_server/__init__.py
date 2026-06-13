@@ -3,13 +3,14 @@ import traceback
 import importlib
 import importlib.util
 from pathlib import Path
-from flask import Flask, Blueprint, json
+from flask import Flask, Blueprint, redirect, url_for, request
+from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
-from typing import List
+from typing import Type, List
 from .__version__ import get_version
 from .config import cnf
 from .views import blueprints, apps_bp
-from .models import db
+from .models import db, User
 
 
 def create_app(name: str) -> Flask:
@@ -24,31 +25,41 @@ def create_app(name: str) -> Flask:
     return app
 
 
-def add_error_handler(app: Flask) -> Flask:
-    @app.errorhandler(Exception)
-    def base_error_handler(exp: Exception):
-        # TODO: Make first and last error code in CNF
-        code = getattr(exp, 'code', 500)
-        if 400 < code <= 500:
-            timed_uuid = uuid.uuid7()
-            setattr(exp, 'uuid', timed_uuid)
+def init_database(app: Flask, db: SQLAlchemy) -> Flask:
+    with app.app_context():
+        db.init_app(app)
+        db.create_all()
 
-            data = {
-                'uuid': str(timed_uuid),
-                'time': timed_uuid.time,
-                'code': code,
-                'name': getattr(exp, 'name', 'Unkhown Error') or exp.__class__.__name__,
-                'description': getattr(exp, 'description', 'No more details'),
-                'traceback': '\n'.join(traceback.format_exception(exp)),
-            }
+    return app
 
-            # TODO: Add path to cnf
-            with open(f'.log/err_{timed_uuid}.json', 'w') as error_file:
-                error_file.write(
-                    json.dumps(data, indent=4),
+
+def init_user_management(app: Flask, User: Type[User]) -> Flask:
+    login_manager = LoginManager(app)
+
+    def user_loader(id):
+        return User.query.get(id)
+
+    login_manager.user_loader(user_loader)
+
+    def unauthuraized():
+        return redirect(url_for('auth.login'))
+
+    login_manager.unauthorized_handler(unauthuraized)
+
+    return app
+
+
+def init_admin_user(app: Flask, User: Type[User]) -> Flask:
+    with app.app_context():
+        admin_user = User.query.filter(User.username == 'admin').first()
+        if admin_user is None:
+            password = input('Admin Password:')
+            re_password = input('Retype Password:')
+            if password == re_password:
+                admin_user = User.create(
+                    username='admin', password=password, email='admin@example.com'
                 )
 
-        raise exp
     return app
 
 
@@ -114,14 +125,6 @@ def register_bluprints(app: Flask, bluprints: list[Blueprint]) -> Flask:
             blueprint.url_prefix = '/' + blueprint.name
 
         app.register_blueprint(blueprint)
-
-    return app
-
-
-def init_database(app: Flask, db: SQLAlchemy) -> Flask:
-    with app.app_context():
-        db.init_app(app)
-        db.create_all()
 
     return app
 

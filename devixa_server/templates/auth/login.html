@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Simple Login</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      margin: 0;
+    }
+
+    .login-container {
+      width: 100%;
+      max-width: 420px;
+    }
+
+    .login-card {
+      background: rgba(255, 255, 255, 0.98);
+      border-radius: 2rem;
+      padding: 2.2rem 2rem 2.5rem 2rem;
+      box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.4);
+    }
+
+    .brand {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .brand-icon {
+      background: linear-gradient(120deg, #3b82f6, #2563eb);
+      width: 60px;
+      height: 60px;
+      border-radius: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem auto;
+      box-shadow: 0 10px 15px -8px rgba(59,130,246,0.4);
+    }
+
+    .brand-icon i {
+      font-size: 2rem;
+      color: white;
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      font-weight: 600;
+      letter-spacing: -0.3px;
+      color: #0f172a;
+      margin-bottom: 0.25rem;
+    }
+
+    .subtitle {
+      color: #64748b;
+      font-size: 0.9rem;
+    }
+
+    .input-group {
+      margin-bottom: 1.5rem;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .input-label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: #1e293b;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .input-label i {
+      width: 18px;
+      color: #3b82f6;
+    }
+
+    .input-field {
+      width: 100%;
+      padding: 0.85rem 1rem;
+      font-size: 1rem;
+      font-family: 'Inter', monospace;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 1rem;
+      transition: all 0.2s ease;
+      background-color: #fefefe;
+      outline: none;
+      color: #0f172a;
+      font-weight: 500;
+    }
+
+    .input-field:focus {
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 4px rgba(59,130,246,0.2);
+      background-color: #ffffff;
+    }
+
+    .password-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .password-wrapper .input-field {
+      padding-right: 3rem;
+    }
+
+    .toggle-pw {
+      position: absolute;
+      right: 14px;
+      background: transparent;
+      border: none;
+      color: #94a3b8;
+      cursor: pointer;
+      font-size: 1.1rem;
+    }
+
+    .toggle-pw:hover {
+      color: #475569;
+    }
+
+    .login-btn {
+      background: linear-gradient(95deg, #3b82f6, #2563eb);
+      width: 100%;
+      padding: 0.9rem;
+      border: none;
+      border-radius: 2rem;
+      font-size: 1rem;
+      font-weight: 600;
+      color: white;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      box-shadow: 0 8px 18px rgba(59,130,246,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 0.5rem;
+    }
+
+    .login-btn:hover {
+      background: linear-gradient(95deg, #2563eb, #1d4ed8);
+      transform: scale(1.01);
+    }
+
+    .login-btn:active {
+      transform: scale(0.98);
+    }
+
+    .login-btn:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+
+    .message-area {
+      margin-top: 1.2rem;
+      background: #fef2f2;
+      border-radius: 1rem;
+      padding: 0.75rem;
+      text-align: center;
+      font-size: 0.8rem;
+      font-weight: 500;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .message-area.show {
+      display: flex;
+    }
+
+    .message-area.error {
+      background: #fef2f2;
+      color: #dc2626;
+      border-left: 4px solid #ef4444;
+    }
+
+    .message-area.success {
+      background: #ecfdf5;
+      color: #059669;
+      border-left: 4px solid #10b981;
+    }
+
+    @media (max-width: 480px) {
+      .login-card {
+        padding: 1.8rem 1.3rem 2rem;
+      }
+      h1 {
+        font-size: 1.6rem;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="login-container">
+  <div class="login-card">
+    <div class="brand">
+      <div class="brand-icon">
+        <i class="fas fa-arrow-right-to-bracket"></i>
+      </div>
+      <h1>Sign in</h1>
+      <div class="subtitle">Enter your credentials to continue</div>
+    </div>
+
+    <form id="loginForm" action="/auth/login" method="POST">
+      <div class="input-group">
+        <label class="input-label" for="username">
+          <i class="fas fa-user"></i> Username
+        </label>
+        <input type="text" id="username" name="username" class="input-field" 
+               placeholder="johndoe" autocomplete="username" required>
+      </div>
+
+      <div class="input-group">
+        <label class="input-label" for="password">
+          <i class="fas fa-lock"></i> Password
+        </label>
+        <div class="password-wrapper">
+          <input type="password" id="password" name="password" class="input-field" 
+                 placeholder="••••••••" autocomplete="current-password" required>
+          <button type="button" class="toggle-pw" id="togglePasswordBtn" aria-label="Show password">
+            <i class="far fa-eye-slash" id="pwIcon"></i>
+          </button>
+        </div>
+      </div>
+
+      <button type="submit" class="login-btn" id="submitBtn">
+        <i class="fas fa-sign-in-alt"></i> Log In
+      </button>
+
+      <div id="formMessage" class="message-area"></div>
+    </form>
+  </div>
+</div>
+
+<script>
+  (function() {
+    const form = document.getElementById('loginForm');
+    const usernameInput = document.getElementById('username');
+    const passwordInput = document.getElementById('password');
+    const messageDiv = document.getElementById('formMessage');
+    const toggleBtn = document.getElementById('togglePasswordBtn');
+    const pwIcon = document.getElementById('pwIcon');
+    const submitBtn = document.getElementById('submitBtn');
+
+    function showMessage(text, type = 'error') {
+      messageDiv.innerHTML = '';
+      let icon = '';
+      if (type === 'error') icon = '<i class="fas fa-exclamation-circle"></i>';
+      if (type === 'success') icon = '<i class="fas fa-check-circle"></i>';
+      messageDiv.innerHTML = `${icon} <span>${escapeHtml(text)}</span>`;
+      messageDiv.className = `message-area show ${type}`;
+      setTimeout(() => {
+        if (messageDiv.classList.contains('show')) {
+          messageDiv.classList.remove('show');
+          messageDiv.className = 'message-area';
+          messageDiv.innerHTML = '';
+        }
+      }, 4000);
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return str.replace(/[&<>]/g, function(m) {
+        if (m === '&') return '&amp;';
+        if (m === '<') return '&lt;';
+        if (m === '>') return '&gt;';
+        return m;
+      });
+    }
+
+    // Password toggle
+    function togglePasswordVisibility() {
+      const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+      passwordInput.setAttribute('type', type);
+      if (type === 'text') {
+        pwIcon.classList.remove('fa-eye-slash');
+        pwIcon.classList.add('fa-eye');
+      } else {
+        pwIcon.classList.remove('fa-eye');
+        pwIcon.classList.add('fa-eye-slash');
+      }
+    }
+    if (toggleBtn) {
+      toggleBtn.addEventListener('click', togglePasswordVisibility);
+    }
+
+    usernameInput.addEventListener('focus', () => {
+      messageDiv.classList.remove('show');
+    });
+    passwordInput.addEventListener('focus', () => {
+      messageDiv.classList.remove('show');
+    });
+
+    function validateForm(username, password) {
+      if (!username || username.trim().length === 0) {
+        showMessage('Please enter your username', 'error');
+        return false;
+      }
+      if (!password || password.trim().length === 0) {
+        showMessage('Please enter your password', 'error');
+        return false;
+      }
+      return true;
+    }
+
+    // Handle form submission - let the browser handle the redirect naturally
+    // This is the key fix: don't use fetch, let the form submit normally
+    // But we want to show loading state and handle errors properly
+    
+    form.addEventListener('submit', (event) => {
+      // We'll still validate, but let the form submit naturally for redirect to work
+      const username = usernameInput.value;
+      const password = passwordInput.value;
+      
+      if (!validateForm(username, password)) {
+        event.preventDefault();
+        return;
+      }
+      
+      // Show loading state
+      submitBtn.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> Signing in...';
+      submitBtn.disabled = true;
+      
+      // The form will submit normally to /auth/login
+      // The browser will follow the redirect automatically
+      // This is the correct behavior for Flask redirects
+    });
+    
+    // Optional: If you want to handle AJAX style but still follow redirects,
+    // here's an alternative approach using fetch with manual redirect following
+    // But the simple form submit above is more reliable for Flask redirects
+    
+    // However, if you prefer to keep the fetch approach but handle redirects properly:
+    /*
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      
+      const username = usernameInput.value;
+      const password = passwordInput.value;
+      
+      if (!validateForm(username, password)) {
+        return;
+      }
+      
+      submitBtn.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> Signing in...';
+      submitBtn.disabled = true;
+      
+      const formData = new URLSearchParams();
+      formData.append('username', username.trim());
+      formData.append('password', password.trim());
+      
+      try {
+        const response = await fetch('/auth/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          body: formData.toString(),
+          credentials: 'same-origin',
+          redirect: 'follow'  // This makes fetch follow redirects automatically
+        });
+        
+        // After redirect, the response will be from the final destination
+        if (response.redirected) {
+          // Manually follow the redirect
+          window.location.href = response.url;
+          return;
+        }
+        
+        if (response.ok) {
+          // If we get here, there was no redirect, but login succeeded
+          showMessage('Login successful!', 'success');
+          setTimeout(() => {
+            window.location.href = '/';
+          }, 1000);
+        } else {
+          let errorMsg = `Login failed (${response.status})`;
+          try {
+            const errorData = await response.json();
+            errorMsg = errorData.message || errorData.error || errorMsg;
+          } catch (e) {}
+          showMessage(errorMsg, 'error');
+          submitBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Log In';
+          submitBtn.disabled = false;
+        }
+      } catch (error) {
+        showMessage('Network error: Unable to reach the server.', 'error');
+        submitBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Log In';
+        submitBtn.disabled = false;
+      }
+    });
+    */
+  })();
+</script>
+</body>
+</html>
