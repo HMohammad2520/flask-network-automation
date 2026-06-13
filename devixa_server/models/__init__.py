@@ -6,7 +6,6 @@ from .script import Script
 from .context import Context
 
 model_map: Dict[str, Type[BaseModel]] = {
-    'user': User,
     'script': Script,
     'context': Context,
 }

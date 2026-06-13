@@ -3,6 +3,7 @@ from sqlalchemy.orm import Mapper
 from typing import Any, Optional, List, Any
 from ._db import db
 
+
 class APIMethod:
     def __init__(
         self,
@@ -49,10 +50,12 @@ class APIMethod:
     def get_request_methods(cls, func):
         return getattr(func, '_request_methods')
 
+
 class BaseModel(db.Model):
     __table__: Table
     __mapper__: Mapper
     __abstract__ = True
+    _column_names = None
 
     id = Column(Integer(), primary_key=True)
     description = Column(Text(), nullable=True)
@@ -69,6 +72,13 @@ class BaseModel(db.Model):
             result[column] = getattr(self, column)
 
         return result
+
+    @property
+    def column_names(self) -> List[str]:
+        if self._column_names is None:
+            self._column_names = [col.name for col in self.__table__.columns]
+        
+        return self._column_names
 
     @classmethod
     @APIMethod(request_methods=['POST'])
@@ -94,16 +104,17 @@ class BaseModel(db.Model):
         if not bool(self.updatable) and not force:
             raise PermissionError(f'This object is readonly: {self}')
 
-        # Get all column names from the table
-        allowed_columns = [col.name for col in self.__table__.columns]
-        
         for k, v in kwargs.items():
-            if k not in allowed_columns:
-                raise PermissionError(f'Not allowed to change this attribute: {k}')
-            
+            if k not in self.column_names:
+                raise PermissionError(
+                    f'Not allowed to change this attribute: {k}'
+                )
+
             if not hasattr(self, k):
-                raise AttributeError(f'Model does not have attribute: {k}')
-            
+                raise AttributeError(
+                    f'Model does not have attribute: {k}'
+                )
+
             setattr(self, k, v)
 
         db.session.add(self)

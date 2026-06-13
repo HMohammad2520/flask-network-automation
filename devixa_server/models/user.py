@@ -1,8 +1,8 @@
 from ._base import BaseModel
 from sqlalchemy import Column, VARCHAR
+from flask_login import UserMixin
 
-
-class User(BaseModel):
+class User(BaseModel, UserMixin):
     __tablename__ = 'users'
 
     first_name = Column(VARCHAR(254), unique=False, nullable=True)
